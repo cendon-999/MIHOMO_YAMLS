@@ -120,6 +120,7 @@ dns:
     "rule-set:Apple": *global-dns
     "rule-set:icloud": *global-dns
     "rule-set:douyin-zj": *cn-dns
+    "rule-set:Cryptocurrency": *cn-dns
     "rule-set:bilibili": *cn-dns
     "rule-set:xiaohongshu": *cn-dns
     "rule-set:Alibaba": *cn-dns
@@ -162,9 +163,10 @@ proxy-groups:
   - {name: "💳PayPal", type: select, icon: https://gh-proxy.com/https://raw.githubusercontent.com/bgpeer/icons/main/color/paypal.png, proxies: *GLOBAL_PROXIES, <<: *AUTO_COMMON}
   - {name: "🌐Google服务", type: select, icon: https://gh-proxy.com/https://raw.githubusercontent.com/bgpeer/icons/main/color/google_1.png, proxies: *GLOBAL_PROXIES, <<: *AUTO_COMMON}
   - {name: "📱Meta", type: select, icon: https://gh-proxy.com/https://raw.githubusercontent.com/bgpeer/icons/main/color/meta.png, proxies: *GLOBAL_PROXIES, <<: *AUTO_COMMON}
-  - {name: "😈GitHub", type: select, icon: https://gh-proxy.com/https://raw.githubusercontent.com/bgpeer/icons/main/color/github_1.png, proxies: *GLOBAL_PROXIES, <<: *AUTO_COMMON}
+  - {name: "😈GitHub", type: select, icon: https://gh-proxy.com/https://raw.githubusercontent.com/bgpeer/icons/main/color/github.png, proxies: *GLOBAL_PROXIES, <<: *AUTO_COMMON}
   - {name: "😊微软服务", type: select, icon: https://gh-proxy.com/https://raw.githubusercontent.com/bgpeer/icons/main/color/microsoft.png, proxies: *GLOBAL_WITH_DIRECT, <<: *AUTO_COMMON}
   - {name: "🍎苹果服务", type: select, icon: https://gh-proxy.com/https://raw.githubusercontent.com/bgpeer/icons/main/color/apple.png, proxies: *GLOBAL_WITH_DIRECT, <<: *AUTO_COMMON}
+  - {name: "💰加密货币", type: select, icon: https://gh-proxy.com/https://raw.githubusercontent.com/bgpeer/icons/main/color/cryptocurrency.png, proxies: *GLOBAL_WITH_DIRECT, <<: *AUTO_COMMON}
   - {name: "📺哔哩哔哩", type: select, icon: https://gh-proxy.com/https://raw.githubusercontent.com/bgpeer/icons/main/color/bilibili_2.png, proxies: *GLOBAL_WITH_DIRECT, <<: *AUTO_COMMON}
   - {name: "📕小红书", type: select, icon: https://gh-proxy.com/https://raw.githubusercontent.com/bgpeer/icons/main/color/xiaohongshu_1.png, proxies: *GLOBAL_WITH_DIRECT, <<: *AUTO_COMMON}
   - {name: "⛩️阿里腾讯", type: select, icon: https://gh-proxy.com/https://raw.githubusercontent.com/bgpeer/icons/main/color/alibaba_tencent.png, proxies: ["🎯直连","🌍全球加速"]}
@@ -197,7 +199,7 @@ rules:
   - RULE-SET,Claude-zj,🤖Claude
   - RULE-SET,TikTok-zj,🎬TikTok
   - RULE-SET,PayPal,💳PayPal
-  - RULE-SET,Facebook-zj,📱Meta
+  - RULE-SET,Cryptocurrency,💰加密货币
   - RULE-SET,WildRift-zj,🎮国际游戏
   - RULE-SET,games-!cn,🎮国际游戏
   - RULE-SET,Telegram-zj,💻Telegram
@@ -205,6 +207,7 @@ rules:
   - RULE-SET,YouTube,🌐Google服务
   - RULE-SET,Google-zj,🌐Google服务
   - RULE-SET,google-ip,🌐Google服务,no-resolve
+  - RULE-SET,Facebook-zj,📱Meta
   - RULE-SET,GitHub-zj,😈GitHub
   - RULE-SET,Microsoft,😊微软服务
   - RULE-SET,icloud,🍎苹果服务
@@ -244,6 +247,7 @@ rule-providers:
   GitHub-zj: {<<: *mrs-domain, url: "https://gh-proxy.com/https://raw.githubusercontent.com/bgpeer/rules/main/geo/geosite/github.mrs"}
   Claude-zj: {<<: *class-yaml, url: "https://gh-proxy.com/https://raw.githubusercontent.com/bgpeer/rules/main/geo/geosite/claude.yaml"}
   PayPal: {<<: *mrs-domain, url: "https://gh-proxy.com/https://raw.githubusercontent.com/bgpeer/rules/main/geo/geosite/paypal.mrs"}
+  Cryptocurrency: {<<: *mrs-domain, url: "https://gh-proxy.com/https://raw.githubusercontent.com/bgpeer/rules/main/geo/geosite/category-cryptocurrency.mrs"}
   YouTube: {<<: *mrs-domain, url: "https://gh-proxy.com/https://raw.githubusercontent.com/bgpeer/rules/main/geo/geosite/youtube.mrs"}
   games-!cn: {<<: *mrs-domain, url: "https://gh-proxy.com/https://raw.githubusercontent.com/bgpeer/rules/main/geo/geosite/category-games-!cn.mrs"}
   twitter: {<<: *mrs-domain, url: "https://gh-proxy.com/https://raw.githubusercontent.com/bgpeer/rules/main/geo/geosite/twitter.mrs"}
