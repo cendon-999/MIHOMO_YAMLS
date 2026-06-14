@@ -55,7 +55,7 @@ FilterHK: &FilterHK { filter: '^(?i).*(港|🇭🇰|Hong|HKG|HK[-_ ]?\d*).*$', i
 
 # Smart 优先级权重
 PriorityLR: &PriorityLR "0.01:9;0.1:8;0.2:7;实验:7;0.3:6;0.4:5;0.5:4;0.6:3;0.7:2;0.8:1" # 低倍率优先级
-PriorityNR: &PriorityNR "优:3;中:2;次:1;备:0.5" # 按订阅质量排序优先级
+PriorityNR: &PriorityNR "优:3;自建:2;次:1;备:0.5" # 按订阅质量排序优先级
 
 # 规则集行为模板
 RuleIntv: &RuleIntv 86400  # 外部规则统一更新时间
@@ -69,20 +69,17 @@ ClsYml: &ClsYml { type: http, behavior: classical, format: yaml, interval: *Rule
 
 # ==================== 机场订阅链接 =====================
 proxy-providers:
-
-  # 优质订阅源 - 优质节点集合，使用时请修改
-  优质服务商: {<<: *BaseProvider, url: '填写你的优质机场订阅链接', override: {additional-suffix: ' [优]'}}
-
+  #节点A - 优质节点集合，使用时请修改
+  优质服务商: {<<: *BaseProvider, url: '优质订阅源地址1', override: {additional-suffix: ' [优]'}}
   # 次优质订阅源 - 次优节点集合，使用时请修改
-  次优服务商: {<<: *BaseProvider, url: '填写你的次优质机场订阅链接', override: {additional-suffix: ' [次]'}}
-
+  次优服务商: {<<: *BaseProvider, url: '优质订阅源地址2', override: {additional-suffix: ' [次]'}}
   # 备用订阅源 - 次优节点集合，使用时请修改
-  备用服务商: {<<: *BaseProvider, url: '填写你的备用机场订阅链接', override: {additional-suffix: ' [备]'}}
-
+  备用服务商: {<<: *BaseProvider, url: '备用订阅源地址', override: {additional-suffix: ' [备]'}}
+  # 自建订阅源 - 自建节点集合，使用时请修改
+  聚合服务商: {<<: *BaseProvider, url: '自建订阅源地址', override: {additional-prefix: '[自建] '}}
   # 落地订阅源 - 落地服务连接，使用时请修改
-  落地服务商: {<<: *BaseProvider, url: '填写你的落地订阅源地址', override: {additional-suffix: ' [中]', dialer-proxy: 中转服务}}
+  落地服务商: {<<: *BaseProvider, url: '中转订阅源地址', override: {additional-suffix: ' [中]', dialer-proxy: 中转服务}}
   
-
 # ==================== 自建代理节点 =====================
 proxies:
 
@@ -166,7 +163,7 @@ sniffer:
 # TUN模式配置
 tun:
   enable: true                             # 开启 TUN 模式
-  stack: mixed                             # 协议栈：mixed (混合) / system / gvisor
+  stack: gvisor                             # 协议栈：mixed (混合) / system / gvisor
   dns-hijack:                              # DNS 劫持 (强制接管设备 DNS 查询)
     - "any:53"                             # 劫持所有 UDP 53
     - "tcp://any:53"                       # 劫持所有 TCP 53
@@ -236,8 +233,14 @@ proxy-groups:
   - {name: 国内直连,       type: select,  proxies: [DIRECT], hidden: true, icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/China.png}
 
   # 中转服务层 - LoadBalance负载均衡，提供中转服务提升连通性，选用一个或多个服务商做中转，比如 优质服务商，可通过正则表达式，过滤掉不需要的节点，使用时请修改
-  - { name: 中转服务,      <<: *BaseLB, use: [优质服务商], filter: 'HK|TW', hidden: true, icon: 'https://github.com/Koolson/Qure/raw/master/IconSet/Color/Round_Robin.png' }
-
+  - {name: 游戏节点, type: select, include-all: true, 
+     filter: '^(?!.*(DIRECT|直接连接|群|邀请|返利|循环|官网|客服|网站|网址|获取|订阅|流量|到期|机场|下次|版本|官址|备用|过期|已用|联系|邮箱|工单|贩卖|通知|倒卖|防止|国内|地址|频道|无法|说明|使用|提示|特别|访问|支持|教程|关注|更新|作者|加入|USE|USED|TOTAL|EXPIRE|EMAIL|Panel|Channel|Author)).*$', 
+     icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/Global.png}
+  - {name: 自建/家宽节点, type: select, include-all: true, filter: "(?=.*(?i)(自建|home))", icon: https://pub-8feead0908f649a8b94397f152fb9cba.r2.dev/private_node.png}
+  - {name: 中转服务, type: select, include-all: true,
+     filter: '^(?!.*(DIRECT|直接连接|群|邀请|返利|循环|官网|客服|网站|网址|获取|订阅|流量|到期|机场|下次|版本|官址|备用|过期|已用|联系|邮箱|工单|贩卖|通知|倒卖|防止|国内|地址|频道|无法|说明|使用|提示|特别|访问|支持|教程|关注|更新|作者|加入|USE|USED|TOTAL|EXPIRE|EMAIL|Panel|Channel|Author)).*$',
+     icon: https://github.com/Koolson/Qure/raw/master/IconSet/Color/Round_Robin.png}
+     
   # 线路特性层 - Fallback故障转移，（适合不想节点总是被切换或者对固定IP有要求，若手动选择节点飘红 会自动切到智能策略组，保证节点可用性）,（不需要该策略可以在组名上添加 # 注释）
   - { name: 香港-故转,     <<: *BaseFB, proxies: [香港-手选, 香港-智能], icon: 'https://github.com/Koolson/Qure/raw/master/IconSet/Color/Hong_Kong.png' }
   - { name: 台湾-故转,     <<: *BaseFB, proxies: [台湾-手选, 台湾-智能], icon: 'https://github.com/Koolson/Qure/raw/master/IconSet/Color/Taiwan.png' }
@@ -284,6 +287,23 @@ rules:
   - RULE-SET,Private-IP,国内直连,no-resolve        # 局域网 IP 直连 (防止环路)
 
 # ==================== 独立/特定分流规则 ====================
+  - DOMAIN-KEYWORD,synology,国内直连
+  - DOMAIN-SUFFIX,appv12.qichacha.net,国内直连
+  - DOMAIN-SUFFIX,gst.prod.dl.playstation.net,国内直连
+  - DOMAIN-SUFFIX,vsean.net,国内直连
+  - DOMAIN-KEYWORD,callofduty,游戏节点
+  - DOMAIN-SUFFIX,cod-assets.cdn.callofduty.com,游戏节点
+  - DOMAIN-SUFFIX,genesis.stun.us.demonware.net,游戏节点
+  - DOMAIN-SUFFIX,genesis.stun.eu.demonware.net,游戏节点
+  - DOMAIN-SUFFIX,sapphire-lobby.prod.demonware.net,游戏节点
+  - DOMAIN-SUFFIX,ingest.datax.activision.com,游戏节点
+  - DOMAIN-KEYWORD,hinet.net,台湾-智能
+  - DOMAIN-KEYWORD,hoy.tv,香港-智能
+  - DOMAIN-KEYWORD,rthktv,香港-智能
+  - DOMAIN-KEYWORD,iill,香港-智能
+  - DOMAIN-KEYWORD,fengshows,国内直连
+  #- DOMAIN-KEYWORD,miguvideo,香港-智能
+  
   # --- PikPak (屏蔽地区检测/直连下载) ---
   - DOMAIN,access.pikpakdrive.com,REJECT
   - DOMAIN,access.mypikpak.com,REJECT
