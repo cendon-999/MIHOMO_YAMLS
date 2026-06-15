@@ -507,7 +507,7 @@ rule-providers:
   China:          { <<: *DmnMrs, url: https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/cn.mrs, path: ./ruleset/cn.mrs }
 
 #==================== IP 规则 ((IP / GeoIP)====================
-  DNS-IP:         { <<: *IpcMrs, url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geojson/dns-encrypted.mrs, path: ./ruleset/Encrypted_DNS_IP.mrs }
+  DNS-IP:         { <<: *IpcMrs, url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-doh.mrs, path: ./ruleset/Encrypted_DNS_IP.mrs }
   Trackers-IP:    { <<: *IpcMrs, url: https://github.com/yhlh9982/clash-rules/releases/download/tracker-rules/trackers_ip.mrs, path: ./ruleset/trackers_ip.mrs }
   Telegram-IP:    { <<: *IpcMrs, url: https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geoip/telegram.mrs, path: ./ruleset/telegram-ip.mrs }
   Facebook-IP:    { <<: *IpcMrs, url: https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geoip/facebook.mrs, path: ./ruleset/facebook-ip.mrs }
