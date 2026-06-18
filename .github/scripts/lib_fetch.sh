@@ -28,12 +28,14 @@ fetch_and_hash() {
   mkdir -p "$(dirname "$out")"
   local tmp="${out}.tmp.$$"
 
-  # 下载 (允许重试 2 次，最大 15 秒超时)
-  if ! curl -fsSL --retry 2 --retry-connrefused --connect-timeout 15 "$url" -o "$tmp"; then
+  # ================== 🛠️ 核心修复位置 🛠️ ==================
+  # 加上了 -g 参数 (即 -gfsSL)，防止 curl 把 URL 中的 [Desktop] 等方括号当成通配符
+  if ! curl -gfsSL --retry 2 --retry-connrefused --connect-timeout 15 "$url" -o "$tmp"; then
     echo -e "${RED}❌ Download Failed:${NC} $url"
     rm -f "$tmp"
     return 1
   fi
+  # ========================================================
 
   # 检查目标文件是否存在以对比 Hash
   if [[ -f "$out" ]]; then
