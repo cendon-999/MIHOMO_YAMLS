@@ -20,8 +20,8 @@
 | 项目 / 维护者 | 说明 | 链接 |
 | :--- | :--- | :---: |
 | **MetaCubeX** | Mihomo 官方示例配置 | [Wiki](https://wiki.metacubex.one/example/) |
-| **666OS** | MihomoPro, OneTouch, Smart 系列配置 | [GitHub](https://github.com/666OS/YYDS) |
-| **HenryChiao** | MIHOMO_AIO (ProMax, Plus, Smart 等) | [GitHub](https://github.com/HenryChiao/MIHOMO_AIO) |
+| **666OS** | MihomoPro, OneTouch, Lite/Mini/Pro (en), OneSmart 系列配置 | [GitHub](https://github.com/666OS/YYDS) |
+| **HenryChiao** | MIHOMO_AIO (ProMax, Plus, Smart, THESmart 等) | [GitHub](https://github.com/HenryChiao/MIHOMO_AIO) |
 | **liandu2024** | Little 整合包 (Fallback, Smart, Dialer) | [GitHub](https://github.com/liandu2024/little) |
 | **Yiteei** | 基础配置 (Redir-host / Fake-ip) | [GitHub](https://github.com/yiteei/Share) |
 | **JohnsonRan** | AIB / AIO 规则整合配置 | [GitHub](https://github.com/JohnsonRan/CRules) |
@@ -34,6 +34,23 @@
 | **Fᴜғᴜ (sunfing)** | ConfigForClash (iNg) | [GitHub](https://github.com/sunfing/iNg) |
 | **liuran001** | Gist 托管的个人配置 | [Gist](https://gist.github.com/liuran001) |
 | **wanswu** | 个人备份配置 | [GitHub](https://github.com/wanswu/my-backup) |
+| **Kerronex** | 收录于 MIHOMO_AIO 仓库内的社区投稿配置 | [GitHub](https://github.com/HenryChiao/MIHOMO_AIO/blob/main/CONFIG/General/Kerronex_config.yaml) |
+| **Mitchell** | 收录于 MIHOMO_AIO 仓库内的社区投稿配置 | [GitHub](https://github.com/HenryChiao/MIHOMO_AIO/blob/main/CONFIG/General/Mitchell_config.yaml) |
+| **Repcz** | Tool 配置合集 (标准版 / Lite) | [GitHub](https://github.com/Repcz/Tool/tree/X) |
+| **lvbibir** | 个人 Mihomo 配置 | [GitHub](https://github.com/lvbibir/clash) |
+| **Seven1echo** | Fallback Geo / Rule-Set 双版本配置 | [GitHub](https://github.com/Seven1echo/Yaml) |
+| **Pililink** | AirRules 订阅规则集配置 | [GitHub](https://github.com/Pililink/AirRules) |
+| **bgpeer** | Clashmi-fx 个人配置 | [Gist](https://gist.github.com/bgpeer/cfd6fcf7bc40c166984b87ecf4fbf920) |
+| **AIsouler** | MyClash 标准版 / Lite 版配置 | [GitHub](https://github.com/AIsouler/MyClash) |
+| **loneshu7** | mihomo_rules 个人配置 | [GitHub](https://github.com/loneshu7/mihomo_rules) |
+| **Ayanami0xL1l1th** | Ayanami0-configs (标准 / Full / Geo-lite) | [GitHub](https://github.com/Ayanami0xL1l1th/Ayanami0-configs) |
+| **Sgraqwq** | Proxy-override 覆写配置 | [GitHub](https://github.com/Sgraqwq/Proxy-override) |
+| **Accademia** | Clash_Configuration_Template 黑白名单规则合集 | [GitHub](https://github.com/Accademia/Clash_Configuration_Template) |
+| **Tangerinell** | mihomo_rules_profile 个人配置 | [GitHub](https://github.com/Tangerinell/mihomo_rules_profile) |
+| **YiXuanZX** | rules 个人配置 | [GitHub](https://github.com/YiXuanZX/rules) |
+| **XVSVTsama** | mihomo-config-self 个人配置 | [GitHub](https://github.com/XVSVTsama/mihomo-config-self) |
+| **ameyukisora** | Clash-Rule 个人配置 | [GitHub](https://github.com/ameyukisora/Clash-Rule) |
+| **EdisonLe12** | 同名 MIHOMO_YAMLS 分支项目的 Smart 配置 | [GitHub](https://github.com/EdisonLe12/MIHOMO_YAMLS) |
 
 <br/>
 
@@ -121,6 +138,24 @@
 | 项目 / 维护者 | 说明 | 链接 |
 | :--- | :--- | :---: |
 | **bmoqing** | Clash 精美图标库 | [GitHub](https://github.com/bmoqing/clash_icon) |
+| **blackmatrix7** | ios_rule_script 彩色图标集 (Color) | [GitHub](https://github.com/blackmatrix7/ios_rule_script/tree/master/icon/color) |
+| **Koolson** | Qure 彩色图标集，含地区图标（如 Hong_Kong.png） | [GitHub](https://github.com/Koolson/Qure) · [CDN](https://testingcf.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/) · [Hong_Kong.png](https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Hong_Kong.png) |
+| **aiHDDe** | Rules 图标集 | [GitHub](https://github.com/aihdde/Rules) · [CDN](https://testingcf.jsdelivr.net/gh/aihdde/Rules@master/icon/) |
+| **DustinWin** | ruleset_geodata 附带图标发布 | [GitHub](https://github.com/DustinWin/ruleset_geodata) · [Releases](https://github.com/DustinWin/ruleset_geodata/releases/tag/icons) |
+| **Vbaethon** | HOMOMIX 图标集 | [GitHub](https://github.com/Vbaethon/HOMOMIX) |
+| **Xhy333** | QuantumultX 图标（Swyx-IP） | [Raw](https://raw.githubusercontent.com/Xhy333/QuantumultX/main/icon/Swyx-IP.png) |
+| **Toperlock** | Quantumult 图标（Doraemon 系列） | [Raw](https://github.com/Toperlock/Quantumult/raw/main/icon/Doraemon/Doraemon-1062.png) |
+
+以下为非 GitHub 的官方图标站点，直接标注官网来源，不反推仓库：
+
+| 站点 | 链接 |
+| :--- | :---: |
+| **Google Icons** | [官网](https://fonts.google.com/icons) |
+| **Flaticon** | [官网](https://www.flaticon.com/free-icons/) |
+| **iCloud Style** | [官网](https://velvetcodeloom.github.io/icloud/icon.html) |
+| **uWarp** | [官网](https://www.uwarp.design/) |
+| **All SVG Icons** | [官网](https://allsvgicons.com/) |
+| **666666.host** | [官网](https://icons.666666.host) |
 
 ---
 
