@@ -32,6 +32,7 @@
 | 📁 **[General_Config/loneshu7](./General_Config/loneshu7/README.md)** | 1 个 | [点击浏览详细列表](./General_Config/loneshu7/README.md) |
 | 📁 **[General_Config/lvbibir](./General_Config/lvbibir/README.md)** | 1 个 | [点击浏览详细列表](./General_Config/lvbibir/README.md) |
 | 📁 **[General_Config/qichiyuhub](./General_Config/qichiyuhub/README.md)** | 1 个 | [点击浏览详细列表](./General_Config/qichiyuhub/README.md) |
+| 📁 **[General_Config/sfssup](./General_Config/sfssup/README.md)** | 1 个 | [点击浏览详细列表](./General_Config/sfssup/README.md) |
 | 📁 **[General_Config/wanswu](./General_Config/wanswu/README.md)** | 1 个 | [点击浏览详细列表](./General_Config/wanswu/README.md) |
 | 📁 **[General_Config/yyhhyyyyyy](./General_Config/yyhhyyyyyy/README.md)** | 2 个 | [点击浏览详细列表](./General_Config/yyhhyyyyyy/README.md) |
 | 📁 **[Mobile_Modules/AkashaProxy](./Mobile_Modules/AkashaProxy/README.md)** | 1 个 | [点击浏览详细列表](./Mobile_Modules/AkashaProxy/README.md) |
