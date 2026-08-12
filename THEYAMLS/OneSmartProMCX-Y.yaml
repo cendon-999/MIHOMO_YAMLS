@@ -84,7 +84,7 @@ proxy-providers:
   聚合服务商: {<<: *BaseProvider, url: '自建订阅源地址', override: {additional-prefix: '[自建] '}}
 
   # 落地订阅源 - 落地服务连接，使用时请修改
-  落地服务商: {<<: *BaseProvider, url: '填写你的落地订阅源地址', override: {additional-suffix: ' [中]', dialer-proxy: 链式代理}}
+  落地服务商: {<<: *BaseProvider, url: '中转订阅源地址', override: {additional-suffix: ' [中]', dialer-proxy: 链式代理}}
   
 
 # ==================== 自建代理节点 =====================
