@@ -23,6 +23,9 @@ proxy-groups:
   # --- 基础组 ---
   - { name: 🎯 全球直连, type: select, proxies: [DIRECT] }
 
+  # 家庭网络占位组：默认直连；支持 Tailscale 的客户端可在本地处理脚本中注入节点。
+  - { name: 🏠 家庭网络, type: select, proxies: [DIRECT] }
+
   # --- 地区自动选择策略组 ---
   
   - { name: 🇭🇰 香港节点, type: url-test, url: "https://www.gstatic.com/generate_204", interval: 120, tolerance: 50, include-all-providers: true, filter: "香港|HK|HKG|(?i)HongKong" }
@@ -271,7 +274,15 @@ rule-providers:
 
 # 规则
 rules:
+  # 优先于 private 规则集，让支持 Tailscale 的客户端接管 Tailnet 和家庭局域网流量。
+  # 不支持 Tailscale 的客户端会通过上面的占位组保持 DIRECT。
+  - IP-CIDR,192.168.31.0/24,🏠 家庭网络,no-resolve
+  - IP-CIDR,100.64.0.0/10,🏠 家庭网络,no-resolve
   - RULE-SET,private,🔒 私有网络
+  # Google OAuth 登录依赖:ssl.gstatic.com 被 ACL4SSR UnBan 误直连、recaptcha.net 被 google-cn 直连,
+  # 与 accounts.google.com 出口 IP 不一致导致登录点击无反应(XTLS/Xray-core#1618),统一走谷歌服务
+  - DOMAIN-SUFFIX,gstatic.com,🇬 谷歌服务
+  - DOMAIN-SUFFIX,recaptcha.net,🇬 谷歌服务
   - RULE-SET,unban,🎯 全球直连
   - RULE-SET,myignore,DIRECT
   - RULE-SET,ads,🛑 广告拦截
