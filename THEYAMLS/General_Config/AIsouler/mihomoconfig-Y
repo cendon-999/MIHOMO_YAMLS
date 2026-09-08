@@ -113,7 +113,7 @@ dns:
   enhanced-mode: fake-ip
   fake-ip-range: 198.18.0.1/15
   fake-ip-range6: 2001:2::1/48
-  fake-ip-filter: ['rule-set:private', 'rule-set:fakeip_filter', 'rule-set:geolocation-cn', '+.proxima.nie.netease.com', '+.sharjeck.com', '+.stun.*', '+.stun.*.*', '+.stun.*.*.*', '+.stun.*.*.*.*', '+.turn', '+.turn.*']
+  fake-ip-filter: ['rule-set:private', 'rule-set:fakeip_filter', 'rule-set:geolocation-cn', 'rule-set:apple_cn', 'rule-set:microsoft_cn', 'rule-set:games_cn', 'rule-set:epicgames', 'rule-set:nvidia_cn', 'rule-set:cn', 'rule-set:cn_additional', '+.proxima.nie.netease.com', '+.sharjeck.com', '+.stun.*', '+.stun.*.*', '+.stun.*.*.*', '+.stun.*.*.*.*', '+.turn', '+.turn.*']
   proxy-server-nameserver: *chinaDohDNS
   default-nameserver: *chinaDohDNS
   nameserver: *foreignDNS
