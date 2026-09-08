@@ -22,53 +22,40 @@ global_exclude_filter:
     exclude-filter: '(?i)(群|返利|循环|官网|客服|网站|网址|获取|订阅|流量|到期|机场|下次|版本|官址|过期|已用|联系|邮箱|工单|贩卖|通知|倒卖|防止|国内|地址|电报|频道|无法|说明|提示|访问|支持|教程|关注|更新|作者|加入|超时|收藏|优惠|福利|邀请|好友|失联|选择|剩余|公益|发布|DIZTNA|通路|登录|定时|渠道|牢记|永久|余额|阁下|本站|刷新|导航|建议|重置|以下|过滤|⚠️|@|t\.me\/\+|\bexpire\b|\bhttps?:\/\/|\.com|\btraffic\b)',
   }
 
-# 订阅提供者（5 订阅源结构，参考 MihomoPro-Y）
-# 通过 additional-prefix / additional-suffix 给节点名加前后缀，区分不同订阅源，防止重名。
+# 订阅提供者（参考 MihomoPro-Y 的 5 订阅源 + 落地中转结构）
+# 注意：请提供您的机场订阅链接，并为每个机场命名；[优][次][备][自建][中] 为节点名称后缀/前缀，可自定义
 proxy-providers:
-  # 优质订阅源 - 优质节点集合
-  CF订阅:
+  优质服务商:
     <<: [*proxy_providers_common, *global_exclude_filter]
-    url: 'http://192.168.0.3:3001/aB3xK9mP2qR7sT4vW8yZ/download/collection/CF%E8%AE%A2%E9%98%85' # 此处单引号中间填入机场订阅链接
-    age-secret-key: ''
+    url: '' # 优质订阅源地址
     path: ./proxy_provider/youzhi.yaml
     override:
-      additional-suffix: ' [优]' # 节点名后缀，区分订阅源
-
-  # 次优订阅源 - 次优节点集合
-  机场:
+      additional-suffix: ' [优]'
+  次优服务商:
     <<: [*proxy_providers_common, *global_exclude_filter]
-    url: 'http://192.168.0.3:3001/aB3xK9mP2qR7sT4vW8yZ/download/%E6%9C%BA%E5%9C%BA'
-    age-secret-key: ''
+    url: '' # 次优订阅源地址
     path: ./proxy_provider/ciyou.yaml
     override:
       additional-suffix: ' [次]'
-
-  # 备用订阅源 - 备用节点集合
-  星链:
+  备用服务商:
     <<: [*proxy_providers_common, *global_exclude_filter]
-    url: 'http://192.168.0.3:3001/aB3xK9mP2qR7sT4vW8yZ/download/%E6%98%9F%E9%93%BE'
-    age-secret-key: ''
+    url: '' # 备用订阅源地址
     path: ./proxy_provider/beiyong.yaml
     override:
       additional-suffix: ' [备]'
-
-  # 聚合/自建订阅源 - 自建节点集合
   聚合服务商:
     <<: [*proxy_providers_common, *global_exclude_filter]
-    url: 'http://192.168.0.3:3001/aB3xK9mP2qR7sT4vW8yZ/download/collection/%E7%94%B2%E9%AA%A8%E6%96%87'
-    age-secret-key: ''
-    path: ./proxy_provider/juhe.yaml
+    url: '' # 自建订阅源地址
+    path: ./proxy_provider/zijian.yaml
     override:
-      additional-prefix: '[自建] ' # 节点名前缀
-
-  # 落地订阅源 - 落地服务连接（暂未使用，整块注释掉避免空 url 报错）
-  # 落地服务商:
-  #   <<: [*proxy_providers_common, *global_exclude_filter]
-  #   url: ''
-  #   age-secret-key: ''
-  #   path: ./proxy_provider/luodi.yaml
-  #   override:
-  #     additional-suffix: ' [中]'
+      additional-prefix: '[自建] '
+  落地服务商:
+    <<: [*proxy_providers_common, *global_exclude_filter]
+    url: '' # 落地订阅源地址
+    path: ./proxy_provider/luodi.yaml
+    override:
+      additional-suffix: ' [中]'
+      dialer-proxy: 中转服务
 
 # 节点配置，可添加自定义节点
 proxies:
@@ -112,7 +99,7 @@ dns:
   enhanced-mode: fake-ip
   fake-ip-range: 198.18.0.1/15
   fake-ip-range6: 2001:2::1/48
-  fake-ip-filter: ['rule-set:private', 'rule-set:fakeip_filter', 'rule-set:geolocation-cn', 'rule-set:apple_cn', 'rule-set:microsoft_cn', 'rule-set:games_cn', 'rule-set:epicgames', 'rule-set:nvidia_cn', 'rule-set:cn', 'rule-set:cn_additional', '+.proxima.nie.netease.com', '+.sharjeck.com', '+.stun.*', '+.stun.*.*', '+.stun.*.*.*', '+.stun.*.*.*.*', '+.turn', '+.turn.*']
+  fake-ip-filter: ['rule-set:private', 'rule-set:fakeip_filter', 'rule-set:geolocation-cn']
   proxy-server-nameserver: *chinaDohDNS
   default-nameserver: *chinaDohDNS
   nameserver: *foreignDNS
@@ -367,6 +354,18 @@ rule-providers:
     path: './ruleset/cn.mrs'
     path-in-bundle: 'geo/geosite/cn.mrs'
 
+  # 参考 MihomoPro-Y 新增规则集
+  LocationDKS:
+    <<: *rule_providers_domain
+    url: 'https://github.com/666OS/rules/raw/release/mihomo/domain/LocationDKS.mrs'
+    path: './ruleset/LocationDKS.mrs'
+    path-in-bundle: 'geo/geosite/LocationDKS.mrs'
+  Speedtest:
+    <<: *rule_providers_domain
+    url: 'https://github.com/666OS/rules/raw/release/mihomo/domain/Speedtest.mrs'
+    path: './ruleset/Speedtest.mrs'
+    path-in-bundle: 'geo/geosite/Speedtest.mrs'
+
 # --- 策略组 (Proxy Groups) ---
 
 # 策略组通用配置
@@ -424,15 +423,18 @@ proxies_common:
           '手动选择',
           '自动选择',
           '负载均衡',
-          '香港策略',
-          '日本策略',
-          '美国策略',
-          '新加坡策略',
-          '台湾策略',
+          '香港',
+          '日本',
+          '美国',
+          '新加坡',
+          '台湾省',
           '低倍率节点',
           '高倍率节点',
           '其他节点',
+          '韩国',
+          '欧盟',
           '游戏节点',
+          '自建/家宽节点',
         ],
     }
 
@@ -445,15 +447,18 @@ proxies_common:
           '自动选择',
           '负载均衡',
           '直连',
-          '香港策略',
-          '日本策略',
-          '美国策略',
-          '新加坡策略',
-          '台湾策略',
+          '香港',
+          '日本',
+          '美国',
+          '新加坡',
+          '台湾省',
           '低倍率节点',
           '高倍率节点',
           '其他节点',
+          '韩国',
+          '欧盟',
           '游戏节点',
+          '自建/家宽节点',
         ],
     }
 
@@ -469,6 +474,11 @@ group_filter:
     }
   SG_filter: &SG_filter { filter: '(?i)(🇸🇬|新加坡|狮城|(?<![A-Za-z])SGP?(?![A-Za-z])|singapore)' }
   TW_filter: &TW_filter { filter: '(?i)(🇹🇼|台湾|台北|高雄|(?<![A-Za-z])TWN?(?![A-Za-z])|taiwan)' }
+  KR_filter: &KR_filter { filter: '(?i)(🇰🇷|韩国|首尔|(?<![A-Za-z])KOR?(?![A-Za-z])|korea|south\s*korea)' }
+  EU_filter:
+    &EU_filter {
+      filter: '(?i)(🇪🇺|欧盟|欧洲|英国|德国|法国|荷兰|瑞典|芬兰|丹麦|比利时|奥地利|爱尔兰|意大利|西班牙|葡萄牙|波兰|捷克|希腊|匈牙利|俄罗斯|(?<![A-Za-z])EU(?![A-Za-z])|(?<![A-Za-z])UK(?![A-Za-z])|(?<![A-Za-z])DE(?![A-Za-z])|(?<![A-Za-z])FR(?![A-Za-z])|(?<![A-Za-z])NL(?![A-Za-z])|(?<![A-Za-z])SE(?![A-Za-z])|(?<![A-Za-z])FI(?![A-Za-z])|(?<![A-Za-z])DK(?![A-Za-z])|(?<![A-Za-z])BE(?![A-Za-z])|(?<![A-Za-z])AT(?![A-Za-z])|(?<![A-Za-z])IE(?![A-Za-z])|(?<![A-Za-z])IT(?![A-Za-z])|(?<![A-Za-z])ES(?![A-Za-z])|(?<![A-Za-z])PT(?![A-Za-z])|(?<![A-Za-z])PL(?![A-Za-z])|(?<![A-Za-z])CZ(?![A-Za-z])|(?<![A-Za-z])GR(?![A-Za-z])|(?<![A-Za-z])HU(?![A-Za-z])|(?<![A-Za-z])RU(?![A-Za-z])|(?<![A-Za-z])GB(?![A-Za-z])|(?<![A-Za-z])LHR(?![A-Za-z])|(?<![A-Za-z])CDG(?![A-Za-z])|(?<![A-Za-z])FRA(?![A-Za-z])|(?<![A-Za-z])AMS(?![A-Za-z])|(?<![A-Za-z])MAD(?![A-Za-z])|(?<![A-Za-z])BCN(?![A-Za-z])|(?<![A-Za-z])FCO(?![A-Za-z])|(?<![A-Za-z])MUC(?![A-Za-z])|(?<![A-Za-z])BRU(?![A-Za-z]))',
+    }
   low_filter:
     &low_filter {
       filter: '(?i)(^(?!.*(?:剩|期)).*(?:(?<!\d)0\.[0-5]|(?<=[ |｜丨∣┃\-‐–—−－﹣])0[*×✕✖⨯⨉x倍])|(?:(?<=[ |｜丨∣┃\-‐–—−－﹣])[*×✕✖⨯⨉x]0(?= |倍|$))|^(?!.*(?:客户端|软件)).*下载|低倍|免费|(?<![A-Za-z])free(?![A-Za-z]))',
@@ -479,7 +489,7 @@ group_filter:
     }
   exclude_filter:
     &exclude_filter {
-      exclude-filter: '(?i)(🇭🇰|香港|(?<![A-Za-z])HKG?(?![A-Za-z])|hong\s*kong|🇯🇵|日本|东京|大阪|京都|(?<![A-Za-z])JPN?(?![A-Za-z])|japan|🇺🇸|美国|纽约|洛杉矶|旧金山|芝加哥|休斯顿|迈阿密|西雅图|波士顿|华盛顿|拉斯维加斯|圣何塞|圣地亚哥|(?<![A-Za-z])USA?(?![A-Za-z])|america|united\s*states|🇸🇬|新加坡|狮城|(?<![A-Za-z])SGP?(?![A-Za-z])|singapore|🇹🇼|台湾|台北|高雄|(?<![A-Za-z])TWN?(?![A-Za-z])|taiwan)',
+      exclude-filter: '(?i)(🇭🇰|香港|(?<![A-Za-z])HKG?(?![A-Za-z])|hong\s*kong|🇯🇵|日本|东京|大阪|京都|(?<![A-Za-z])JPN?(?![A-Za-z])|japan|🇺🇸|美国|纽约|洛杉矶|旧金山|芝加哥|休斯顿|迈阿密|西雅图|波士顿|华盛顿|拉斯维加斯|圣何塞|圣地亚哥|(?<![A-Za-z])USA?(?![A-Za-z])|america|united\s*states|🇸🇬|新加坡|狮城|(?<![A-Za-z])SGP?(?![A-Za-z])|singapore|🇹🇼|台湾|台北|高雄|(?<![A-Za-z])TWN?(?![A-Za-z])|taiwan|🇰🇷|韩国|首尔|(?<![A-Za-z])KOR?(?![A-Za-z])|korea|south\s*korea|🇪🇺|欧盟|欧洲|英国|德国|法国|荷兰|瑞典|芬兰|丹麦|比利时|奥地利|爱尔兰|意大利|西班牙|葡萄牙|波兰|捷克|希腊|匈牙利|俄罗斯|(?<![A-Za-z])EU(?![A-Za-z])|(?<![A-Za-z])UK(?![A-Za-z])|(?<![A-Za-z])DE(?![A-Za-z])|(?<![A-Za-z])FR(?![A-Za-z])|(?<![A-Za-z])NL(?![A-Za-z])|(?<![A-Za-z])SE(?![A-Za-z])|(?<![A-Za-z])FI(?![A-Za-z])|(?<![A-Za-z])DK(?![A-Za-z])|(?<![A-Za-z])BE(?![A-Za-z])|(?<![A-Za-z])AT(?![A-Za-z])|(?<![A-Za-z])IE(?![A-Za-z])|(?<![A-Za-z])IT(?![A-Za-z])|(?<![A-Za-z])ES(?![A-Za-z])|(?<![A-Za-z])PT(?![A-Za-z])|(?<![A-Za-z])PL(?![A-Za-z])|(?<![A-Za-z])CZ(?![A-Za-z])|(?<![A-Za-z])GR(?![A-Za-z])|(?<![A-Za-z])HU(?![A-Za-z])|(?<![A-Za-z])RU(?![A-Za-z])|(?<![A-Za-z])GB(?![A-Za-z])|(?<![A-Za-z])LHR(?![A-Za-z])|(?<![A-Za-z])CDG(?![A-Za-z])|(?<![A-Za-z])FRA(?![A-Za-z])|(?<![A-Za-z])AMS(?![A-Za-z])|(?<![A-Za-z])MAD(?![A-Za-z])|(?<![A-Za-z])BCN(?![A-Za-z])|(?<![A-Za-z])FCO(?![A-Za-z])|(?<![A-Za-z])MUC(?![A-Za-z])|(?<![A-Za-z])BRU(?![A-Za-z])',
       exclude-type: 'direct',
     }
 
@@ -489,18 +499,21 @@ proxy-groups:
     <<: *group_common_select
     proxies:
       [
-        '香港策略',
-        '日本策略',
-        '美国策略',
-        '新加坡策略',
-        '台湾策略',
+        '香港',
+        '日本',
+        '美国',
+        '新加坡',
+        '台湾省',
         '低倍率节点',
         '高倍率节点',
         '手动选择',
         '自动选择',
         '负载均衡',
         '其他节点',
+        '韩国',
+        '欧盟',
         '游戏节点',
+        '自建/家宽节点',
       ]
     icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Proxy.png'
 
@@ -531,7 +544,7 @@ proxy-groups:
 
   - name: 'AI'
     <<: [*group_common_select, *proxies_default]
-    default-selected: '美国策略'
+    default-selected: '美国'
     icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/ChatGPT.png'
 
   - name: 'Microsoft'
@@ -551,7 +564,7 @@ proxy-groups:
     icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Steam.png'
 
   - name: 'TikTok'
-    default-selected: '日本策略'
+    default-selected: '日本'
     <<: [*group_common_select, *proxies_default]
     icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/TikTok.png'
 
@@ -580,12 +593,12 @@ proxy-groups:
     icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Spotify.png'
 
   - name: 'Crypto'
-    default-selected: '日本策略'
+    default-selected: '日本'
     <<: [*group_common_select, *proxies_default]
     icon: 'https://fastly.jsdelivr.net/gh/lige47/QuanX-icon-rule@main/icon/04ProxySoft/Bitcoin.png'
 
   - name: 'EHentai'
-    default-selected: '美国策略'
+    default-selected: '美国'
     <<: [*group_common_select, *proxies_default]
     icon: 'https://fastly.jsdelivr.net/gh/lige47/QuanX-icon-rule@main/icon/04ProxySoft/exhentai.png'
 
@@ -600,12 +613,11 @@ proxy-groups:
 
   - name: '直连'
     <<: *group_common_select
-    url: 'https://www.baidu.com' # 直连组测速用国内地址，避免走代理解析国外域名导致 DIRECT 拨号不通
     proxies: ['🇨🇳 直连 | 双栈', '🇨🇳 直连 | IPv4优先', '🇨🇳 直连 | IPv6优先', '🇨🇳 直连 | 仅IPv4', '🇨🇳 直连 | 仅IPv6']
     icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/China.png'
 
   # 定义地区策略组
-  - name: '香港策略'
+  - name: '香港'
     <<: [*group_common_select, *HK_filter]
     include-all: true
     proxies: ['香港-自动选择']
@@ -613,7 +625,7 @@ proxy-groups:
   - name: '香港-自动选择'
     <<: [*group_common_auto, *HK_filter]
 
-  - name: '日本策略'
+  - name: '日本'
     <<: [*group_common_select, *JP_filter]
     include-all: true
     proxies: ['日本-自动选择']
@@ -621,7 +633,7 @@ proxy-groups:
   - name: '日本-自动选择'
     <<: [*group_common_auto, *JP_filter]
 
-  - name: '美国策略'
+  - name: '美国'
     <<: [*group_common_select, *US_filter]
     include-all: true
     proxies: ['美国-自动选择']
@@ -629,7 +641,7 @@ proxy-groups:
   - name: '美国-自动选择'
     <<: [*group_common_auto, *US_filter]
 
-  - name: '新加坡策略'
+  - name: '新加坡'
     <<: [*group_common_select, *SG_filter]
     include-all: true
     proxies: ['新加坡-自动选择']
@@ -637,12 +649,12 @@ proxy-groups:
   - name: '新加坡-自动选择'
     <<: [*group_common_auto, *SG_filter]
 
-  - name: '台湾策略'
+  - name: '台湾省'
     <<: [*group_common_select, *TW_filter]
     include-all: true
-    proxies: ['台湾策略-自动选择']
+    proxies: ['台湾省-自动选择']
     icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Taiwan.png'
-  - name: '台湾策略-自动选择'
+  - name: '台湾省-自动选择'
     <<: [*group_common_auto, *TW_filter]
 
   - name: '低倍率节点'
@@ -669,12 +681,62 @@ proxy-groups:
   - name: '其他节点-自动选择'
     <<: [*group_common_auto, *exclude_filter]
 
-  # 游戏节点 - 供各 Select 组挑选游戏低延迟节点（排除信息类节点）
+  # 参考 MihomoPro-Y 新增：韩国 / 欧盟 地区策略组
+  - name: '韩国'
+    <<: [*group_common_select, *KR_filter]
+    include-all: true
+    proxies: ['韩国-自动选择', '韩国均衡-散列', '韩国均衡-轮询']
+    icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Korea.png'
+  - name: '韩国-自动选择'
+    <<: [*group_common_auto, *KR_filter]
+  - name: '韩国均衡-散列'
+    <<: [*group_common_load, *KR_filter]
+    strategy: 'consistent-hashing'
+  - name: '韩国均衡-轮询'
+    <<: [*group_common_load, *KR_filter]
+    strategy: 'round-robin'
+
+  - name: '欧盟'
+    <<: [*group_common_select, *EU_filter]
+    include-all: true
+    proxies: ['欧盟-自动选择', '欧盟均衡-散列', '欧盟均衡-轮询']
+    icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/European_Union.png'
+  - name: '欧盟-自动选择'
+    <<: [*group_common_auto, *EU_filter]
+  - name: '欧盟均衡-散列'
+    <<: [*group_common_load, *EU_filter]
+    strategy: 'consistent-hashing'
+  - name: '欧盟均衡-轮询'
+    <<: [*group_common_load, *EU_filter]
+    strategy: 'round-robin'
+
+  # 参考 MihomoPro-Y 新增：游戏 / 自建 / 中转
   - name: '游戏节点'
     <<: *group_common_select
     include-all: true
-    filter: '^(?!.*(DIRECT|直接连接|群|邀请|返利|循环|官网|客服|网站|网址|获取|订阅|流量|到期|机场|下次|版本|官址|备用|过期|已用|联系|邮箱|工单|贩卖|通知|倒卖|防止|国内|地址|频道|无法|说明|使用|提示|特别|访问|支持|教程|关注|更新|作者|加入|USE|USED|TOTAL|EXPIRE|EMAIL|Panel|Channel|Author)).*$'
-    icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Game.png'
+    exclude-type: 'DIRECT'
+    icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Global.png'
+  - name: '自建/家宽节点'
+    <<: *group_common_select
+    include-all: true
+    filter: '(?i)(自建|home)'
+    icon: 'https://pub-8feead0908f649a8b94397f152fb9cba.r2.dev/private_node.png'
+  - name: '中转服务'
+    <<: *group_common_select
+    include-all: true
+    exclude-type: 'DIRECT'
+    icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Round_Robin.png'
+
+  # 参考 MihomoPro-Y 新增：网络测试 / 抖快书定位
+  - name: '网络测试'
+    <<: [*group_common_select, *proxies_default]
+    include-all: true
+    exclude-type: 'DIRECT'
+    icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Speedtest.png'
+  - name: '抖快书定位'
+    <<: *group_common_select
+    proxies: ['直连', '香港', '台湾省', '新加坡', '日本', '韩国', '美国', '欧盟']
+    icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Null_Nation.png'
 
 # --- 路由规则 (Rules) ---
 
@@ -696,6 +758,10 @@ rules:
 
   # 广告拦截
   - RULE-SET,adblockmihomolite,AdBlock
+  # 参考 MihomoPro-Y 新增
+  - RULE-SET,LocationDKS,抖快书定位
+  - DOMAIN-KEYWORD,speedtest,网络测试
+  - RULE-SET,Speedtest,网络测试
 
   # 代理规则
   - RULE-SET,googlefcm,FCM
