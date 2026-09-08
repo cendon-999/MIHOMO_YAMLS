@@ -639,7 +639,7 @@ proxy-groups:
     include-all: true
     proxies: ['台湾-自动选择']
     icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Taiwan.png'
-  - name: '台湾省-自动选择'
+  - name: '台湾-自动选择'
     <<: [*group_common_auto, *TW_filter]
 
   - name: '低倍率节点'
