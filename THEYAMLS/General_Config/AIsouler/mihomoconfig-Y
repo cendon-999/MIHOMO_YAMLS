@@ -128,7 +128,7 @@ ntp:
 
 tun:
   enable: true
-  stack: system
+  stack: gvisor
   auto-route: true
   strict-route: true
   auto-redirect: true
@@ -410,11 +410,11 @@ proxies_common:
           '手动选择',
           '自动选择',
           '负载均衡',
-          '香港',
-          '日本',
-          '美国',
-          '新加坡',
-          '台湾省',
+          '香港策略',
+          '日本策略',
+          '美国策略',
+          '新加坡策略',
+          '台湾策略',
           '低倍率节点',
           '高倍率节点',
           '其他节点',
@@ -431,11 +431,11 @@ proxies_common:
           '自动选择',
           '负载均衡',
           '直连',
-          '香港',
-          '日本',
-          '美国',
-          '新加坡',
-          '台湾省',
+          '香港策略',
+          '日本策略',
+          '美国策略',
+          '新加坡策略',
+          '台湾策略',
           '低倍率节点',
           '高倍率节点',
           '其他节点',
@@ -475,11 +475,11 @@ proxy-groups:
     <<: *group_common_select
     proxies:
       [
-        '香港',
-        '日本',
-        '美国',
-        '新加坡',
-        '台湾省',
+        '香港策略',
+        '日本策略',
+        '美国策略',
+        '新加坡策略',
+        '台湾策略',
         '低倍率节点',
         '高倍率节点',
         '手动选择',
@@ -523,7 +523,7 @@ proxy-groups:
 
   - name: 'AI'
     <<: [*group_common_select, *proxies_default]
-    default-selected: '美国'
+    default-selected: '美国策略'
     icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/ChatGPT.png'
 
   - name: 'Microsoft'
@@ -543,7 +543,7 @@ proxy-groups:
     icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Steam.png'
 
   - name: 'TikTok'
-    default-selected: '日本'
+    default-selected: '日本策略'
     <<: [*group_common_select, *proxies_default]
     icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/TikTok.png'
 
@@ -572,12 +572,12 @@ proxy-groups:
     icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Spotify.png'
 
   - name: 'Crypto'
-    default-selected: '日本'
+    default-selected: '日本策略'
     <<: [*group_common_select, *proxies_default]
     icon: 'https://fastly.jsdelivr.net/gh/lige47/QuanX-icon-rule@main/icon/04ProxySoft/Bitcoin.png'
 
   - name: 'EHentai'
-    default-selected: '美国'
+    default-selected: '美国策略'
     <<: [*group_common_select, *proxies_default]
     icon: 'https://fastly.jsdelivr.net/gh/lige47/QuanX-icon-rule@main/icon/04ProxySoft/exhentai.png'
 
@@ -596,7 +596,7 @@ proxy-groups:
     icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/China.png'
 
   # 定义地区策略组
-  - name: '香港'
+  - name: '香港策略'
     <<: [*group_common_select, *HK_filter]
     include-all: true
     proxies: ['香港-自动选择']
@@ -604,7 +604,7 @@ proxy-groups:
   - name: '香港-自动选择'
     <<: [*group_common_auto, *HK_filter]
 
-  - name: '日本'
+  - name: '日本策略'
     <<: [*group_common_select, *JP_filter]
     include-all: true
     proxies: ['日本-自动选择']
@@ -612,7 +612,7 @@ proxy-groups:
   - name: '日本-自动选择'
     <<: [*group_common_auto, *JP_filter]
 
-  - name: '美国'
+  - name: '美国策略'
     <<: [*group_common_select, *US_filter]
     include-all: true
     proxies: ['美国-自动选择']
@@ -620,7 +620,7 @@ proxy-groups:
   - name: '美国-自动选择'
     <<: [*group_common_auto, *US_filter]
 
-  - name: '新加坡'
+  - name: '新加坡策略'
     <<: [*group_common_select, *SG_filter]
     include-all: true
     proxies: ['新加坡-自动选择']
@@ -628,7 +628,7 @@ proxy-groups:
   - name: '新加坡-自动选择'
     <<: [*group_common_auto, *SG_filter]
 
-  - name: '台湾省'
+  - name: '台湾策略'
     <<: [*group_common_select, *TW_filter]
     include-all: true
     proxies: ['台湾省-自动选择']
