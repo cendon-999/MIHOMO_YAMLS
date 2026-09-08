@@ -64,12 +64,12 @@ proxy-providers:
 
   # 落地订阅源 - 落地服务连接（如需前置中转，可在此 provider 加 dialer-proxy 指向中转策略组）
   #落地服务商:
-    <<: [*proxy_providers_common, *global_exclude_filter]
-    url: ''
-    age-secret-key: ''
-    path: ./proxy_provider/luodi.yaml
-    override:
-      additional-suffix: ' [中]'
+  #  <<: [*proxy_providers_common, *global_exclude_filter]
+  #  url: ''
+  #  age-secret-key: ''
+  #  path: ./proxy_provider/luodi.yaml
+  #  override:
+  #    additional-suffix: ' [中]'
 
 # 节点配置，可添加自定义节点
 proxies:
