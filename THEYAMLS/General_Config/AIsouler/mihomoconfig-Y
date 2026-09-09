@@ -524,6 +524,7 @@ proxy-groups:
   - name: 'AI'
     <<: *group_common_select
     include-all: true
+    exclude-type: 'DIRECT'
     icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/ChatGPT.png'
 
   - name: 'Microsoft'
@@ -664,10 +665,10 @@ proxy-groups:
 
 rules:
   # jsdelivr CDN 直连超时，走代理
-  - DOMAIN-SUFFIX,jsdelivr.net,默认代理
+  #- DOMAIN-SUFFIX,jsdelivr.net,默认代理
   # github 直连超时，走代理
-  - DOMAIN-SUFFIX,github.com,默认代理
-  - DOMAIN-SUFFIX,githubusercontent.com,默认代理
+  #- DOMAIN-SUFFIX,github.com,默认代理
+  #- DOMAIN-SUFFIX,githubusercontent.com,默认代理
   # 私有网络直连
   - RULE-SET,private,直连
 
