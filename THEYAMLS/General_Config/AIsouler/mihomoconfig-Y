@@ -522,8 +522,8 @@ proxy-groups:
     icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Google_Search.png'
 
   - name: 'AI'
-    <<: [*group_common_select, *proxies_default]
-    default-selected: '美国策略'
+    <<: *group_common_select
+    include-all: true
     icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/ChatGPT.png'
 
   - name: 'Microsoft'
