@@ -324,6 +324,11 @@ rule-providers:
     url: 'https://raw.githubusercontent.com/appshubcc/bett-rules/meta/geo/geosite/ehentai.mrs'
     path: './ruleset/ehentai.mrs'
     path-in-bundle: 'geo/geosite/ehentai.mrs'
+  speedtest:
+    <<: *rule_providers_domain
+    url: 'https://raw.githubusercontent.com/666OS/rules/release/mihomo/domain/Speedtest.mrs'
+    path: './ruleset/speedtest.mrs'
+    path-in-bundle: 'geo/geosite/speedtest.mrs'
   geolocation-!cn:
     <<: *rule_providers_domain
     url: 'https://raw.githubusercontent.com/appshubcc/bett-rules/meta/geo/geosite/geolocation-!cn.mrs'
@@ -415,7 +420,7 @@ proxies_common:
           '美国策略',
           '新加坡策略',
           '台湾策略',
-          '低倍率节点',
+          '欧盟策略',
           '高倍率节点',
           '其他节点',
           '游戏节点',
@@ -436,7 +441,7 @@ proxies_common:
           '美国策略',
           '新加坡策略',
           '台湾策略',
-          '低倍率节点',
+          '欧盟策略',
           '高倍率节点',
           '其他节点',
           '游戏节点',
@@ -455,9 +460,9 @@ group_filter:
     }
   SG_filter: &SG_filter { filter: '(?i)(🇸🇬|新加坡|狮城|(?<![A-Za-z])SGP?(?![A-Za-z])|singapore)' }
   TW_filter: &TW_filter { filter: '(?i)(🇹🇼|台湾|台北|高雄|(?<![A-Za-z])TWN?(?![A-Za-z])|taiwan)' }
-  low_filter:
-    &low_filter {
-      filter: '(?i)(^(?!.*(?:剩|期)).*(?:(?<!\d)0\.[0-5]|(?<=[ |｜丨∣┃\-‐–—−－﹣])0[*×✕✖⨯⨉x倍])|(?:(?<=[ |｜丨∣┃\-‐–—−－﹣])[*×✕✖⨯⨉x]0(?= |倍|$))|^(?!.*(?:客户端|软件)).*下载|低倍|免费|(?<![A-Za-z])free(?![A-Za-z]))',
+  EU_filter:
+    &EU_filter {
+      filter: '(?i)(🇦🇹|🇧🇪|🇧🇬|🇭🇷|🇨🇾|🇨🇿|🇩🇰|🇪🇪|🇫🇮|🇫🇷|🇩🇪|🇬🇷|🇭🇺|🇮🇪|🇮🇹|🇱🇻|🇱🇹|🇱🇺|🇲🇹|🇳🇱|🇵🇱|🇵🇹|🇷🇴|🇸🇰|🇸🇮|🇪🇸|🇸🇪|🇬🇧|🇷🇺|欧盟|欧洲|英国|法国|德国|意大利|西班牙|葡萄牙|荷兰|比利时|瑞典|芬兰|丹麦|波兰|捷克|奥地利|瑞士|挪威|爱尔兰|希腊|匈牙利|罗马|伦敦|巴黎|柏林|马德里|巴塞罗那|莫斯科|阿姆斯特丹|法兰克福|卢森堡|华沙|布鲁塞尔|(?<![A-Za-z])EU(?![A-Za-z])|(?<![A-Za-z])GB(?![A-Za-z])|(?<![A-Za-z])UK(?![A-Za-z])|(?<![A-Za-z])RU(?![A-Za-z])|(?<![A-Za-z])FR(?![A-Za-z])|(?<![A-Za-z])DE(?![A-Za-z])|(?<![A-Za-z])IT(?![A-Za-z])|(?<![A-Za-z])ES(?![A-Za-z])|(?<![A-Za-z])PT(?![A-Za-z])|(?<![A-Za-z])NL(?![A-Za-z])|(?<![A-Za-z])BE(?![A-Za-z])|(?<![A-Za-z])SE(?![A-Za-z])|(?<![A-Za-z])FI(?![A-Za-z])|(?<![A-Za-z])DK(?![A-Za-z])|(?<![A-Za-z])PL(?![A-Za-z])|(?<![A-Za-z])CZ(?![A-Za-z])|(?<![A-Za-z])AT(?![A-Za-z])|(?<![A-Za-z])CH(?![A-Za-z])|(?<![A-Za-z])NO(?![A-Za-z])|(?<![A-Za-z])IE(?![A-Za-z])|(?<![A-Za-z])GR(?![A-Za-z])|(?<![A-Za-z])HU(?![A-Za-z])|(?<![A-Za-z])RO(?![A-Za-z])|(?<![A-Za-z])BG(?![A-Za-z])|(?<![A-Za-z])HR(?![A-Za-z])|(?<![A-Za-z])CY(?![A-Za-z])|(?<![A-Za-z])EE(?![A-Za-z])|(?<![A-Za-z])LV(?![A-Za-z])|(?<![A-Za-z])LT(?![A-Za-z])|(?<![A-Za-z])LU(?![A-Za-z])|(?<![A-Za-z])MT(?![A-Za-z])|(?<![A-Za-z])SK(?![A-Za-z])|(?<![A-Za-z])SI(?![A-Za-z])|CDG|FRA|AMS|MAD|BCN|FCO|MUC|BRU|LHR|LGW|europe)',
     }
   high_filter:
     &high_filter {
@@ -480,7 +485,7 @@ proxy-groups:
         '美国策略',
         '新加坡策略',
         '台湾策略',
-        '低倍率节点',
+        '欧盟策略',
         '高倍率节点',
         '手动选择',
         '自动选择',
@@ -507,6 +512,10 @@ proxy-groups:
     include-all: true
     exclude-type: 'DIRECT'
     icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Global.png'
+
+  - name: '网络测试'
+    <<: [*group_common_select, *proxies_default]
+    icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Speedtest.png'
 
   - name: 'FCM'
     <<: [*group_common_select, *proxies_direct]
@@ -637,13 +646,13 @@ proxy-groups:
   - name: '台湾省-自动选择'
     <<: [*group_common_auto, *TW_filter]
 
-  - name: '低倍率节点'
-    <<: [*group_common_select, *low_filter]
+  - name: '欧盟策略'
+    <<: [*group_common_select, *EU_filter]
     include-all: true
-    proxies: ['低倍率节点-自动选择']
-    icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Available_1.png'
-  - name: '低倍率节点-自动选择'
-    <<: [*group_common_auto, *low_filter]
+    proxies: ['欧盟-自动选择']
+    icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/EU.png'
+  - name: '欧盟-自动选择'
+    <<: [*group_common_auto, *EU_filter]
 
   - name: '高倍率节点'
     <<: [*group_common_select, *high_filter]
@@ -687,6 +696,10 @@ rules:
 
   # 广告拦截
   - RULE-SET,adblockmihomolite,AdBlock
+
+  # 网络测试
+  - DOMAIN-KEYWORD,speedtest,网络测试
+  - RULE-SET,speedtest,网络测试
 
   # 代理规则
   - RULE-SET,googlefcm,FCM
