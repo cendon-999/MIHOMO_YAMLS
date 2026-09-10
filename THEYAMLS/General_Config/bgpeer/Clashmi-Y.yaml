@@ -4,10 +4,11 @@
 # 4用此配置可以关闭软件里的所有复写
 p: &p {type: http, interval: 3600, health-check: {enable: true, url: "https://www.gstatic.com/generate_204", interval: 300}}
 proxy-providers:
-  # 这是机场配置 🔻，将下面的_#机场订阅_换成自己的机场链接，保留两边的引号符
-  机场1: {<<: *p, url: "#机场订阅", override: {additional-prefix: "¹"}}
-  机场2: {<<: *p, url: "#机场订阅", override: {additional-prefix: "²"}}
-  机场3: {<<: *p, url: "#机场订阅", override: {additional-prefix: "³"}}
+  # 这是机场订阅模板，替换下面的_#机场订阅_为你的机场链接，保留引号和前缀标识
+  优质订阅: {<<: *p, url: "#机场订阅", override: {additional-prefix: "¹"}}
+  次优订阅: {<<: *p, url: "#机场订阅", override: {additional-prefix: "²"}}
+  备用: {<<: *p, url: "#机场订阅", override: {additional-prefix: "³"}}
+  自建: {<<: *p, url: "#机场订阅", override: {additional-prefix: "⁴"}}
 
 port: 7896
 socks-port: 7891
