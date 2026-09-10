@@ -5,10 +5,10 @@
 p: &p {type: http, interval: 3600, health-check: {enable: true, url: "https://www.gstatic.com/generate_204", interval: 300}}
 proxy-providers:
   # 这是机场订阅模板，替换下面的_#机场订阅_为你的机场链接，保留引号和前缀标识
-  优质订阅: {<<: *p, url: "#机场订阅", override: {additional-prefix: "¹"}}
-  次优订阅: {<<: *p, url: "#机场订阅", override: {additional-prefix: "²"}}
-  备用: {<<: *p, url: "#机场订阅", override: {additional-prefix: "³"}}
-  自建: {<<: *p, url: "#机场订阅", override: {additional-prefix: "⁴"}}
+  优质订阅: {<<: *p, url: "优质订阅源地址1", override: {additional-prefix: "¹"}}
+  次优订阅: {<<: *p, url: "#优质订阅源地址2", override: {additional-prefix: "²"}}
+  备用: {<<: *p, url: "#备用订阅源地址", override: {additional-prefix: "³"}}
+  自建: {<<: *p, url: "#自建订阅源地址", override: {additional-prefix: "⁴"}}
 
 port: 7896
 socks-port: 7891
