@@ -139,14 +139,14 @@ sniffer:
 
 pg-anchor:
   - &URLTEST_COMMON {type: url-test, lazy: true, icon: https://gh-proxy.com/https://raw.githubusercontent.com/bgpeer/icons/main/color/bypass.png, include-all: true, exclude-type: direct, url: "https://www.gstatic.com/generate_204", interval: 120, tolerance: 30, timeout: 5000, hidden: true}
-  - &GLOBAL_PROXIES ["🌍全球加速","🔗链式出口","♻️全部随机","🖐️手动选择","🇭🇰香港策略","🇹🇼台湾策略","🇯🇵日本策略","🇸🇬新加坡策略","🇰🇷韩国策略","🇺🇸美国策略","🇪🇺欧盟策略","🎯直连"]
-  - &GLOBAL_WITH_DIRECT ["🎯直连","🌍全球加速","🔗链式出口","♻️全部随机","🖐️手动选择","🇭🇰香港策略","🇹🇼台湾策略","🇯🇵日本策略","🇸🇬新加坡策略","🇰🇷韩国策略","🇺🇸美国策略","🇪🇺欧盟策略"]
+  - &GLOBAL_PROXIES ["🌍全球加速","🔗链式出口","🖐️手动选择","🇭🇰香港策略","🇹🇼台湾策略","🇯🇵日本策略","🇸🇬新加坡策略","🇰🇷韩国策略","🇺🇸美国策略","🇪🇺欧盟策略","🎯直连"]
+  - &GLOBAL_WITH_DIRECT ["🎯直连","🌍全球加速","🔗链式出口","🖐️手动选择","🇭🇰香港策略","🇹🇼台湾策略","🇯🇵日本策略","🇸🇬新加坡策略","🇰🇷韩国策略","🇺🇸美国策略","🇪🇺欧盟策略"]
   - &AUTO_COMMON {include-all: true, exclude-type: direct, filter: ".*"}
-  - &CHAIN_EXIT_LIST ["♻️全部随机","🇭🇰香港策略","🇹🇼台湾策略","🇯🇵日本策略","🇸🇬新加坡策略","🇰🇷韩国策略","🇺🇸美国策略","🇪🇺欧盟策略"]
-  - &CHAIN_RELAY_LIST ["🌍全球加速","♻️全部随机","🇭🇰香港策略","🇹🇼台湾策略","🇯🇵日本策略","🇸🇬新加坡策略","🇰🇷韩国策略","🇺🇸美国策略","🇪🇺欧盟策略"]
+  - &CHAIN_EXIT_LIST ["🇭🇰香港策略","🇹🇼台湾策略","🇯🇵日本策略","🇸🇬新加坡策略","🇰🇷韩国策略","🇺🇸美国策略","🇪🇺欧盟策略"]
+  - &CHAIN_RELAY_LIST ["🌍全球加速","🇭🇰香港策略","🇹🇼台湾策略","🇯🇵日本策略","🇸🇬新加坡策略","🇰🇷韩国策略","🇺🇸美国策略","🇪🇺欧盟策略"]
   
 proxy-groups:
-  - {name: "🌍全球加速", type: select, icon: https://gh-proxy.com/https://raw.githubusercontent.com/bgpeer/icons/main/color/global_1.png, proxies: ["♻️全部随机","🔗链式出口","🖐️手动选择","🇭🇰香港策略","🇹🇼台湾策略","🇯🇵日本策略","🇸🇬新加坡策略","🇰🇷韩国策略","🇺🇸美国策略","🇪🇺欧盟策略"], <<: *AUTO_COMMON, url: "https://www.gstatic.com/generate_204", interval: 120, timeout: 5000}
+  - {name: "🌍全球加速", type: select, icon: https://gh-proxy.com/https://raw.githubusercontent.com/bgpeer/icons/main/color/global_1.png, proxies: ["🔗链式出口","🖐️手动选择","🇭🇰香港策略","🇹🇼台湾策略","🇯🇵日本策略","🇸🇬新加坡策略","🇰🇷韩国策略","🇺🇸美国策略","🇪🇺欧盟策略"], <<: *AUTO_COMMON, url: "https://www.gstatic.com/generate_204", interval: 120, timeout: 5000}
   - {name: "🎷抖音", type: select, icon: https://gh-proxy.com/https://raw.githubusercontent.com/bgpeer/icons/main/color/douyin_1.png, proxies: *GLOBAL_WITH_DIRECT, <<: *AUTO_COMMON}
   - {name: "🎬TikTok", type: select, icon: https://gh-proxy.com/https://raw.githubusercontent.com/bgpeer/icons/main/color/tiktok_1.png, proxies: *GLOBAL_PROXIES, <<: *AUTO_COMMON}
   - {name: "🎮国际游戏", type: select, icon: https://gh-proxy.com/https://raw.githubusercontent.com/bgpeer/icons/main/color/game_2.png, proxies: *GLOBAL_PROXIES, <<: *AUTO_COMMON}
@@ -184,8 +184,7 @@ proxy-groups:
   - {name: "🇪🇺欧盟策略", type: select, icon: https://gh-proxy.com/https://raw.githubusercontent.com/bgpeer/icons/main/color/bypass.png, proxies: ["🇪🇺欧盟自动选择"], <<: *AUTO_COMMON}
   - {name: "🇪🇺欧盟自动选择", <<: *URLTEST_COMMON, filter: "🇦🇹|🇧🇪|🇧🇬|🇭🇷|🇨🇾|🇨🇿|🇩🇰|🇪🇪|🇫🇮|🇫🇷|🇩🇪|🇬🇷|🇭🇺|🇮🇪|🇮🇹|🇱🇻|🇱🇹|🇱🇺|🇲🇹|🇳🇱|🇵🇱|🇵🇹|🇷🇴|🇸🇰|🇸🇮|🇪🇸|🇸🇪|🇬🇧|🇷🇺|欧盟|欧洲|英国|法国|德国|意大利|西班牙|葡萄牙|荷兰|比利时|瑞典|芬兰|丹麦|波兰|捷克|奥地利|瑞士|挪威|爱尔兰|希腊|匈牙利|卢森堡|伦敦|巴黎|柏林|马德里|巴塞罗那|阿姆斯特丹|法兰克福|EU|GB|UK|FR|DE|NL|SE|RU|Europe|europe"}
   - {name: "🖐️手动选择", type: select, icon: https://gh-proxy.com/https://raw.githubusercontent.com/bgpeer/icons/main/color/bypass.png, <<: *AUTO_COMMON}
-  - {name: "🌐网络测速", type: select, icon: https://gh-proxy.com/https://raw.githubusercontent.com/bgpeer/icons/main/color/speedtest.png, proxies: ["🌍全球加速","♻️全部随机","🎯直连"], <<: *AUTO_COMMON}
-  - {name: "♻️全部随机", <<: *URLTEST_COMMON, filter: ".*"}
+  - {name: "🌐网络测速", type: select, icon: https://gh-proxy.com/https://raw.githubusercontent.com/bgpeer/icons/main/color/speedtest.png, proxies: ["🌍全球加速","🎯直连"], <<: *AUTO_COMMON}
 
 tunnels:
   - {network: [tcp, udp], address: 127.0.0.1:7788, target: jp1.wildrift.riotgames.com:443, proxy: "🎮国际游戏"}
