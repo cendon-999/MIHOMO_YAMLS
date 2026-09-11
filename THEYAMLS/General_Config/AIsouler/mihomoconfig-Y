@@ -27,31 +27,31 @@ global_exclude_filter:
 proxy-providers:
   优质服务商:
     <<: [*proxy_providers_common, *global_exclude_filter]
-    url: '优质订阅源地址1' # 优质订阅源地址
+    url: '优质订阅源地址1' 
     path: ./proxy_provider/youzhi.yaml
     override:
       additional-suffix: ' [优]'
   次优服务商:
     <<: [*proxy_providers_common, *global_exclude_filter]
-    url: '优质订阅源地址2' # 次优订阅源地址
+    url: '优质订阅源地址2' 
     path: ./proxy_provider/ciyou.yaml
     override:
       additional-suffix: ' [次]'
   备用服务商:
     <<: [*proxy_providers_common, *global_exclude_filter]
-    url: '备用订阅源地址' # 备用订阅源地址
+    url: '备用订阅源地址' 
     path: ./proxy_provider/beiyong.yaml
     override:
       additional-suffix: ' [备]'
   聚合服务商:
     <<: [*proxy_providers_common, *global_exclude_filter]
-    url: '自建订阅源地址' # 自建订阅源地址
+    url: '自建订阅源地址' 
     path: ./proxy_provider/zijian.yaml
     override:
       additional-prefix: '[自建] '
   #落地服务商:
   # <<: [*proxy_providers_common, *global_exclude_filter]
-  #  url: '中转订阅源地址' # 落地订阅源地址
+  #  url: '中转订阅源地址' 
   #  path: ./proxy_provider/luodi.yaml
   #  override:
   #    additional-suffix: ' [中]'
