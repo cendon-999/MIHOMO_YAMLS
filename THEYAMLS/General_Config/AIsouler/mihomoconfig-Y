@@ -608,6 +608,7 @@ proxy-groups:
 
   - name: '直连'
     <<: *group_common_select
+    url: 'http://connect.rom.miui.com/generate_204'   # 直连节点用国内测速点（apple.com境外直连会超时）
     proxies: ['🇨🇳 直连 | 双栈', '🇨🇳 直连 | IPv4优先', '🇨🇳 直连 | IPv6优先', '🇨🇳 直连 | 仅IPv4', '🇨🇳 直连 | 仅IPv6']
     icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/China.png'
 
