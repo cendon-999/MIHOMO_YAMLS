@@ -451,10 +451,6 @@ group_filter:
     &EU_filter {
       filter: '(?i)(🇦🇹|🇧🇪|🇧🇬|🇭🇷|🇨🇾|🇨🇿|🇩🇰|🇪🇪|🇫🇮|🇫🇷|🇩🇪|🇬🇷|🇭🇺|🇮🇪|🇮🇹|🇱🇻|🇱🇹|🇱🇺|🇲🇹|🇳🇱|🇵🇱|🇵🇹|🇷🇴|🇸🇰|🇸🇮|🇪🇸|🇸🇪|🇬🇧|🇷🇺|欧盟|欧洲|英国|法国|德国|意大利|西班牙|葡萄牙|荷兰|比利时|瑞典|芬兰|丹麦|波兰|捷克|奥地利|瑞士|挪威|爱尔兰|希腊|匈牙利|罗马|伦敦|巴黎|柏林|马德里|巴塞罗那|莫斯科|阿姆斯特丹|法兰克福|卢森堡|华沙|布鲁塞尔|(?<![A-Za-z])EU(?![A-Za-z])|(?<![A-Za-z])GB(?![A-Za-z])|(?<![A-Za-z])UK(?![A-Za-z])|(?<![A-Za-z])RU(?![A-Za-z])|(?<![A-Za-z])FR(?![A-Za-z])|(?<![A-Za-z])DE(?![A-Za-z])|(?<![A-Za-z])IT(?![A-Za-z])|(?<![A-Za-z])ES(?![A-Za-z])|(?<![A-Za-z])PT(?![A-Za-z])|(?<![A-Za-z])NL(?![A-Za-z])|(?<![A-Za-z])BE(?![A-Za-z])|(?<![A-Za-z])SE(?![A-Za-z])|(?<![A-Za-z])FI(?![A-Za-z])|(?<![A-Za-z])DK(?![A-Za-z])|(?<![A-Za-z])PL(?![A-Za-z])|(?<![A-Za-z])CZ(?![A-Za-z])|(?<![A-Za-z])AT(?![A-Za-z])|(?<![A-Za-z])CH(?![A-Za-z])|(?<![A-Za-z])NO(?![A-Za-z])|(?<![A-Za-z])IE(?![A-Za-z])|(?<![A-Za-z])GR(?![A-Za-z])|(?<![A-Za-z])HU(?![A-Za-z])|(?<![A-Za-z])RO(?![A-Za-z])|(?<![A-Za-z])BG(?![A-Za-z])|(?<![A-Za-z])HR(?![A-Za-z])|(?<![A-Za-z])CY(?![A-Za-z])|(?<![A-Za-z])EE(?![A-Za-z])|(?<![A-Za-z])LV(?![A-Za-z])|(?<![A-Za-z])LT(?![A-Za-z])|(?<![A-Za-z])LU(?![A-Za-z])|(?<![A-Za-z])MT(?![A-Za-z])|(?<![A-Za-z])SK(?![A-Za-z])|(?<![A-Za-z])SI(?![A-Za-z])|CDG|FRA|AMS|MAD|BCN|FCO|MUC|BRU|LHR|LGW|europe)',
     }
-  high_filter:
-    &high_filter {
-      filter: '(?i)(?<=[ |｜丨∣┃\-‐–—−－﹣])((?:[*×✕✖⨯⨉x]\s*(?:[2-9]\d*|[1-9]\d+)(?:\.\d+)?)|(?:(?<![\d.])(?:[2-9]\d*|[1-9]\d+)(?:\.\d+)?\s*(?:倍|[*×✕✖⨯⨉x])))',
-    }
   exclude_filter:
     &exclude_filter {
       exclude-filter: '(?i)(🇭🇰|香港|(?<![A-Za-z])HKG?(?![A-Za-z])|hong\s*kong|🇯🇵|日本|东京|大阪|京都|(?<![A-Za-z])JPN?(?![A-Za-z])|japan|🇺🇸|美国|纽约|洛杉矶|旧金山|芝加哥|休斯顿|迈阿密|西雅图|波士顿|华盛顿|拉斯维加斯|圣何塞|圣地亚哥|(?<![A-Za-z])USA?(?![A-Za-z])|america|united\s*states|🇸🇬|新加坡|狮城|(?<![A-Za-z])SGP?(?![A-Za-z])|singapore|🇹🇼|台湾|台北|高雄|(?<![A-Za-z])TWN?(?![A-Za-z])|taiwan)',
@@ -663,14 +659,6 @@ proxy-groups:
     icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/EU.png'
   - name: '欧盟-自动选择'
     <<: [*group_common_auto, *EU_filter]
-
-  - name: '高倍率节点'
-    <<: [*group_common_select, *high_filter]
-    include-all: true
-    proxies: ['高倍率节点-自动选择']
-    icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Airport.png'
-  - name: '高倍率节点-自动选择'
-    <<: [*group_common_auto, *high_filter]
 
   - name: '其他节点'
     <<: [*group_common_select, *exclude_filter]
