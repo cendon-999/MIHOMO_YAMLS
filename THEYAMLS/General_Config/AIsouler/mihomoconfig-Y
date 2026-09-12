@@ -42,6 +42,7 @@ proxy-providers:
     <<: [*proxy_providers_common, *global_exclude_filter]
     url: '自建订阅源地址'
     path: ./proxy_provider/zijian.yaml
+    dialer-proxy: '🔗链式中转'
     override:
       additional-prefix: '[自建] '
 
@@ -504,8 +505,6 @@ proxy-groups:
 
   - name: '🔗链式出口'
     type: select
-    override:
-      dialer-proxy: '🔗链式中转'
     include-all: true
     exclude-type: 'DIRECT'
     <<: *relay_exclude
