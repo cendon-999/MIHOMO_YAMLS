@@ -500,6 +500,8 @@ proxy-groups:
     type: select
     include-all: true
     exclude-type: 'DIRECT'
+    proxies:
+      - 'DIRECT'   # 选这顶 = 不走中转（落地节点直连）；选下面的中转节点 = 走中转
     <<: *relay_filter
     icon: 'https://gh-proxy.com/https://raw.githubusercontent.com/bgpeer/icons/main/color/chaintransfer.png'
 
