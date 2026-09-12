@@ -1,9 +1,5 @@
 #  ---------说明---------
-#  mihomo配置（全量版）
-#  作者：AIsouler
-#  原仓库：https://github.com/AIsouler/MyClash
-#  配置链接：https://raw.githubusercontent.com/AIsouler/MyClash/main/Config/mihomoConfig.yaml
-#  友情推荐，非常好用、省电且内存占用低的代理软件：https://github.com/appshubcc/Bettbox
+#  mihomo配置（全量版）- 已加入链式代理（手动版）
 #  ---------------------
 
 # --- 锚点定义 (通用属性) ---
@@ -22,47 +18,50 @@ global_exclude_filter:
     exclude-filter: '(?i)(群|返利|循环|官网|客服|网站|网址|获取|订阅|流量|到期|机场|下次|版本|官址|过期|已用|联系|邮箱|工单|贩卖|通知|倒卖|防止|国内|地址|电报|频道|无法|说明|提示|访问|支持|教程|关注|更新|作者|加入|超时|收藏|优惠|福利|邀请|好友|失联|选择|剩余|公益|发布|DIZTNA|通路|登录|定时|渠道|牢记|永久|余额|阁下|本站|刷新|导航|建议|重置|以下|过滤|⚠️|@|t\.me\/\+|\bexpire\b|\bhttps?:\/\/|\.com|\btraffic\b)',
   }
 
-# 订阅提供者（参考 MihomoPro-Y 的 5 订阅源结构）
-# 注意：请提供您的机场订阅链接，并为每个机场命名；[优][次][备][自建][中] 为节点名称后缀/前缀，可自定义
+# 订阅提供者
 proxy-providers:
   优质服务商:
     <<: [*proxy_providers_common, *global_exclude_filter]
-    url: '优质订阅源地址1' 
+    url: '优质订阅源地址1'
     path: ./proxy_provider/youzhi.yaml
     override:
       additional-suffix: ' [优]'
   次优服务商:
     <<: [*proxy_providers_common, *global_exclude_filter]
-    url: '优质订阅源地址2' 
+    url: '优质订阅源地址2'
     path: ./proxy_provider/ciyou.yaml
     override:
       additional-suffix: ' [次]'
   备用服务商:
     <<: [*proxy_providers_common, *global_exclude_filter]
-    url: '备用订阅源地址' 
+    url: '备用订阅源地址'
     path: ./proxy_provider/beiyong.yaml
     override:
       additional-suffix: ' [备]'
   聚合服务商:
     <<: [*proxy_providers_common, *global_exclude_filter]
-    url: '自建订阅源地址' 
+    url: '自建订阅源地址'
     path: ./proxy_provider/zijian.yaml
     override:
       additional-prefix: '[自建] '
-  #落地服务商:
-  # <<: [*proxy_providers_common, *global_exclude_filter]
-  #  url: '中转订阅源地址' 
-  #  path: ./proxy_provider/luodi.yaml
-  #  override:
-  #    additional-suffix: ' [中]'
 
-# 节点配置，可添加自定义节点
+# 节点配置
 proxies:
   - { name: '🇨🇳 直连 | 双栈', type: direct }
   - { name: '🇨🇳 直连 | IPv4优先', type: direct, ip-version: ipv4-prefer }
   - { name: '🇨🇳 直连 | IPv6优先', type: direct, ip-version: ipv6-prefer }
   - { name: '🇨🇳 直连 | 仅IPv4', type: direct, ip-version: ipv4 }
   - { name: '🇨🇳 直连 | 仅IPv6', type: direct, ip-version: ipv6 }
+  # ↓ 在这里添加你的前置/自建节点
+  # 名字里带"中转/前置/ECS/阿里/relay"任一关键词，就会被 🔗链式中转 组自动收录
+  # 示例格式：
+  # - name: 'SS-中转-自定义'
+  #   type: ss
+  #   server: <服务器IP>
+  #   port: <端口>
+  #   cipher: <加密方式>
+  #   password: '<密码>'
+  #   udp: true
 
 # --- 基础全局配置 ---
 
@@ -109,11 +108,7 @@ dns:
 hosts:
   'cloudflare-dns.com': ['1.1.1.1', '1.0.0.1']
   'dns.google': ['8.8.8.8', '8.8.4.4']
-
-  # 解决谷歌商店无法下载的问题
   'services.googleapis.cn': 'services.googleapis.com'
-
-  # 屏蔽哔哩哔哩PCDN，解决访问视频卡顿/直播问题
   '+.mcdn.bilivideo.com': ['0.0.0.0']
   '+.mcdn.bilivideo.cn': ['0.0.0.0']
   '+.edge.mountaintoys.cn': ['0.0.0.0']
@@ -137,15 +132,12 @@ tun:
 
 # --- 规则集 ---
 
-# Rule Provider 通用配置
 rule_providers_common:
   rule_providers_domain: &rule_providers_domain { type: http, format: mrs, interval: 86400, behavior: domain }
   rule_providers_ip: &rule_providers_ip { type: http, format: mrs, interval: 86400, behavior: ipcidr }
 
-# 定义 Rule Providers
 rule-providers:
   # --- 直连规则集 ---
-
   private:
     <<: *rule_providers_domain
     url: 'https://raw.githubusercontent.com/appshubcc/bett-rules/meta/geo/geosite/private.mrs'
@@ -193,7 +185,6 @@ rule-providers:
     path-in-bundle: 'geo/geoip/cn.mrs'
 
   # --- 代理规则集 ---
-
   googlefcm:
     <<: *rule_providers_domain
     url: 'https://raw.githubusercontent.com/appshubcc/bett-rules/meta/geo/geosite/googlefcm.mrs'
@@ -303,7 +294,7 @@ rule-providers:
     <<: *rule_providers_domain
     url: 'https://raw.githubusercontent.com/appshubcc/bett-rules/meta/geo/geosite/pikpak.mrs'
     path: './ruleset/pikpak.mrs'
-    'path-in-bundle': 'geo/geosite/pikpak.mrs'
+    path-in-bundle: 'geo/geosite/pikpak.mrs'
   spotify:
     <<: *rule_providers_domain
     url: 'https://raw.githubusercontent.com/appshubcc/bett-rules/meta/geo/geosite/spotify.mrs'
@@ -336,7 +327,6 @@ rule-providers:
     path-in-bundle: 'geo/geosite/geolocation-!cn.mrs'
 
   # --- 其他规则集 ---
-
   adblockmihomolite:
     <<: *rule_providers_domain
     url: 'https://raw.githubusercontent.com/217heidai/adblockfilters/main/rules/adblockmihomolite.mrs'
@@ -358,9 +348,8 @@ rule-providers:
     path: './ruleset/cn.mrs'
     path-in-bundle: 'geo/geosite/cn.mrs'
 
-# --- 策略组 (Proxy Groups) ---
+# --- 策略组 ---
 
-# 策略组通用配置
 group_common:
   group_common_select:
     &group_common_select {
@@ -405,13 +394,13 @@ group_common:
       hidden: true,
     }
 
-# 通用代理节点组
 proxies_common:
   proxies_default:
     &proxies_default {
       proxies:
         [
           '默认代理',
+          '🔗链式出口',
           '手动选择',
           '自动选择',
           '负载均衡',
@@ -432,6 +421,7 @@ proxies_common:
       proxies:
         [
           '默认代理',
+          '🔗链式出口',
           '手动选择',
           '自动选择',
           '负载均衡',
@@ -450,7 +440,6 @@ proxies_common:
 
   proxies_reject: &proxies_reject { proxies: ['REJECT', 'REJECT-DROP', 'PASS'] }
 
-# 地区过滤器正则表达式定义
 group_filter:
   HK_filter: &HK_filter { filter: '(?i)(🇭🇰|香港|(?<![A-Za-z])HKG?(?![A-Za-z])|hong\s*kong)' }
   JP_filter: &JP_filter { filter: '(?i)(🇯🇵|日本|东京|大阪|京都|(?<![A-Za-z])JPN?(?![A-Za-z])|japan)' }
@@ -474,12 +463,17 @@ group_filter:
       exclude-type: 'direct',
     }
 
-# 定义分流策略组
+# 链式代理过滤器
+chain_filter:
+  relay_filter: &relay_filter { filter: '(?i)(中转|前置|relay|ecs|阿里|aliyun)' }
+  relay_exclude: &relay_exclude { exclude-filter: '(?i)(中转|前置|relay|ecs|阿里|aliyun)' }
+
 proxy-groups:
   - name: '默认代理'
     <<: *group_common_select
     proxies:
       [
+        '🔗链式出口',
         '香港策略',
         '日本策略',
         '美国策略',
@@ -506,6 +500,23 @@ proxy-groups:
 
   - name: '负载均衡'
     <<: *group_common_load
+
+  # --- 链式代理（手动版） ---
+  - name: '🔗链式中转'
+    type: select
+    include-all: true
+    exclude-type: 'DIRECT'
+    <<: *relay_filter
+    icon: 'https://gh-proxy.com/https://raw.githubusercontent.com/bgpeer/icons/main/color/chaintransfer.png'
+
+  - name: '🔗链式出口'
+    type: select
+    override:
+      dialer-proxy: '🔗链式中转'
+    include-all: true
+    exclude-type: 'DIRECT'
+    <<: *relay_exclude
+    icon: 'https://gh-proxy.com/https://raw.githubusercontent.com/bgpeer/icons/main/color/chainexport.png'
 
   - name: '游戏节点'
     <<: *group_common_select
@@ -607,7 +618,7 @@ proxy-groups:
     proxies: ['🇨🇳 直连 | 双栈', '🇨🇳 直连 | IPv4优先', '🇨🇳 直连 | IPv6优先', '🇨🇳 直连 | 仅IPv4', '🇨🇳 直连 | 仅IPv6']
     icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/China.png'
 
-  # 定义地区策略组
+  # 地区策略组
   - name: '香港策略'
     <<: [*group_common_select, *HK_filter]
     include-all: true
@@ -672,20 +683,15 @@ proxy-groups:
   - name: '其他节点-自动选择'
     <<: [*group_common_auto, *exclude_filter]
 
-# --- 路由规则 (Rules) ---
+# --- 路由规则 ---
 
 rules:
-  # jsdelivr CDN 直连超时，走代理
-  #- DOMAIN-SUFFIX,jsdelivr.net,默认代理
-  # github 直连超时，走代理
-  #- DOMAIN-SUFFIX,github.com,默认代理
-  #- DOMAIN-SUFFIX,githubusercontent.com,默认代理
   # 私有网络直连
   - RULE-SET,private,直连
 
   # 国内直连
   - RULE-SET,geolocation-cn,直连
-  - RULE-SET,games_cn,直连 # 已包含 steam 下载域名
+  - RULE-SET,games_cn,直连
   - RULE-SET,epicgames,直连
   - RULE-SET,nvidia_cn,直连
   - RULE-SET,apple_cn,直连
