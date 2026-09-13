@@ -44,14 +44,6 @@ proxy-providers:
     path: ./proxy_provider/zijian.yaml
     override:
       additional-prefix: '[自建] '
-  链式落地:
-    <<: [*proxy_providers_common, *global_exclude_filter]
-    url: '自建订阅源地址'
-    path: ./proxy_provider/chain_land.yaml
-    filter: '(?i)(land)'
-    dialer-proxy: '🔗链式中转'
-    override:
-      additional-prefix: '[落地·中转] '
 
 # 节点配置
 proxies:
@@ -233,16 +225,6 @@ rule-providers:
     url: 'https://raw.githubusercontent.com/appshubcc/bett-rules/meta/geo/geosite/apple.mrs'
     path: './ruleset/apple.mrs'
     path-in-bundle: 'geo/geosite/apple.mrs'
-  microsoft_ip:
-    <<: *rule_providers_ip
-    url: 'https://raw.githubusercontent.com/appshubcc/bett-rules/meta/geo/geoip/microsoft.mrs'
-    path: './ruleset/microsoft_ip.mrs'
-    path-in-bundle: 'geo/geoip/microsoft.mrs'
-  apple_ip:
-    <<: *rule_providers_ip
-    url: 'https://raw.githubusercontent.com/appshubcc/bett-rules/meta/geo/geoip/apple.mrs'
-    path: './ruleset/apple_ip.mrs'
-    path-in-bundle: 'geo/geoip/apple.mrs'
   telegram:
     <<: *rule_providers_domain
     url: 'https://raw.githubusercontent.com/appshubcc/bett-rules/meta/geo/geosite/telegram.mrs'
@@ -479,7 +461,6 @@ group_filter:
 chain_filter:
   relay_filter: &relay_filter { filter: '(?i)(中转|前置|relay|ecs|阿里|aliyun)' }
   relay_exclude: &relay_exclude { exclude-filter: '(?i)(中转|前置|relay|ecs|阿里|aliyun)' }
-  relay_exit_filter: &relay_exit_filter { filter: '(?i)(land)' }
 
 proxy-groups:
   - name: '默认代理'
@@ -517,12 +498,17 @@ proxy-groups:
   - name: '🔗链式中转'
     type: select
     include-all: true
+    exclude-type: 'DIRECT'
     <<: *relay_filter
     icon: 'https://gh-proxy.com/https://raw.githubusercontent.com/bgpeer/icons/main/color/chaintransfer.png'
 
   - name: '🔗链式出口'
     type: select
-    use: ['链式落地']
+    override:
+      dialer-proxy: '🔗链式中转'
+    include-all: true
+    exclude-type: 'DIRECT'
+    <<: *relay_exclude
     icon: 'https://gh-proxy.com/https://raw.githubusercontent.com/bgpeer/icons/main/color/chainexport.png'
 
   - name: '游戏节点'
@@ -622,7 +608,6 @@ proxy-groups:
 
   - name: '直连'
     <<: *group_common_select
-    url: 'http://www.baidu.com'   # 直连节点用国内双栈测速点（miui的IPv6在你网络不通，apple境外直连超时）
     proxies: ['🇨🇳 直连 | 双栈', '🇨🇳 直连 | IPv4优先', '🇨🇳 直连 | IPv6优先', '🇨🇳 直连 | 仅IPv4', '🇨🇳 直连 | 仅IPv6']
     icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/China.png'
 
@@ -717,9 +702,7 @@ rules:
   - RULE-SET,ai,AI
   - RULE-SET,github,默认代理
   - RULE-SET,microsoft,Microsoft
-  - RULE-SET,microsoft_ip,Microsoft,no-resolve
   - RULE-SET,apple,Apple
-  - RULE-SET,apple_ip,Apple,no-resolve
   - RULE-SET,telegram,Telegram
   - RULE-SET,telegram_ip,Telegram,no-resolve
   - RULE-SET,steam,Steam
