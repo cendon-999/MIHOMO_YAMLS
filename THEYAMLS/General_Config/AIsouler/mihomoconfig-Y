@@ -45,15 +45,6 @@ proxy-providers:
     dialer-proxy: '🔗链式中转'
     override:
       additional-prefix: '[自建] '
-  链式出口:
-    <<: [*proxy_providers_common, *global_exclude_filter]
-    url: '自建订阅源地址'
-    path: ./proxy_provider/chain_exit.yaml
-    filter: '(?i)(land)'
-    dialer-proxy: '🔗链式中转'
-    override:
-      additional-prefix: '[出口·中转] '
-
 # 节点配置
 proxies:
   - { name: '🇨🇳 直连 | 双栈', type: direct }
@@ -419,7 +410,6 @@ proxies_common:
       proxies:
         [
           '默认代理',
-          '🔗链式出口',
           '手动选择',
           '自动选择',
           '负载均衡',
@@ -439,7 +429,6 @@ proxies_common:
       proxies:
         [
           '默认代理',
-          '🔗链式出口',
           '手动选择',
           '自动选择',
           '负载均衡',
@@ -486,7 +475,6 @@ proxy-groups:
     <<: *group_common_select
     proxies:
       [
-        '🔗链式出口',
         '香港策略',
         '日本策略',
         '美国策略',
@@ -519,11 +507,6 @@ proxy-groups:
     include-all: true
     <<: *relay_filter
     icon: 'https://gh-proxy.com/https://raw.githubusercontent.com/bgpeer/icons/main/color/chaintransfer.png'
-
-  - name: '🔗链式出口'
-    type: select
-    use: ['链式出口']
-    icon: 'https://gh-proxy.com/https://raw.githubusercontent.com/bgpeer/icons/main/color/chainexport.png'
 
   - name: '游戏节点'
     <<: *group_common_select
