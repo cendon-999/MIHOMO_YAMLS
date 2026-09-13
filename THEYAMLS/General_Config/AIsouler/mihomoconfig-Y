@@ -472,6 +472,7 @@ group_filter:
 chain_filter:
   relay_filter: &relay_filter { filter: '(?i)(中转|前置|relay|ecs|阿里|aliyun)' }
   relay_exclude: &relay_exclude { exclude-filter: '(?i)(中转|前置|relay|ecs|阿里|aliyun)' }
+  relay_exit_filter: &relay_exit_filter { filter: '(?i)(出口|落地|exit|land)' }
 
 proxy-groups:
   - name: '默认代理'
@@ -516,7 +517,7 @@ proxy-groups:
     type: select
     include-all: true
     exclude-type: 'DIRECT'
-    <<: *relay_exclude
+    <<: *relay_exit_filter
     icon: 'https://gh-proxy.com/https://raw.githubusercontent.com/bgpeer/icons/main/color/chainexport.png'
 
   - name: '游戏节点'
