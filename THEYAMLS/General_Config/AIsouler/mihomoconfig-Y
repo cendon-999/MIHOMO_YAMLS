@@ -42,6 +42,7 @@ proxy-providers:
     <<: [*proxy_providers_common, *global_exclude_filter]
     url: '自建订阅源地址'
     path: ./proxy_provider/zijian.yaml
+    dialer-proxy: '🔗链式中转'
     override:
       additional-prefix: '[自建] '
 
@@ -225,6 +226,16 @@ rule-providers:
     url: 'https://raw.githubusercontent.com/appshubcc/bett-rules/meta/geo/geosite/apple.mrs'
     path: './ruleset/apple.mrs'
     path-in-bundle: 'geo/geosite/apple.mrs'
+  microsoft_ip:
+    <<: *rule_providers_ip
+    url: 'https://raw.githubusercontent.com/appshubcc/bett-rules/meta/geo/geoip/microsoft.mrs'
+    path: './ruleset/microsoft_ip.mrs'
+    path-in-bundle: 'geo/geoip/microsoft.mrs'
+  apple_ip:
+    <<: *rule_providers_ip
+    url: 'https://raw.githubusercontent.com/appshubcc/bett-rules/meta/geo/geoip/apple.mrs'
+    path: './ruleset/apple_ip.mrs'
+    path-in-bundle: 'geo/geoip/apple.mrs'
   telegram:
     <<: *rule_providers_domain
     url: 'https://raw.githubusercontent.com/appshubcc/bett-rules/meta/geo/geosite/telegram.mrs'
@@ -498,14 +509,13 @@ proxy-groups:
   - name: '🔗链式中转'
     type: select
     include-all: true
-    exclude-type: 'DIRECT'
+    proxies:
+      - '直连'   # 选这顶 = 不走中转（落地直连）；选下面的中转节点 = 走中转
     <<: *relay_filter
     icon: 'https://gh-proxy.com/https://raw.githubusercontent.com/bgpeer/icons/main/color/chaintransfer.png'
 
   - name: '🔗链式出口'
     type: select
-    override:
-      dialer-proxy: '🔗链式中转'
     include-all: true
     exclude-type: 'DIRECT'
     <<: *relay_exclude
@@ -608,6 +618,7 @@ proxy-groups:
 
   - name: '直连'
     <<: *group_common_select
+    url: 'http://www.baidu.com'   # 直连节点用国内双栈测速点（miui的IPv6在你网络不通，apple境外直连超时）
     proxies: ['🇨🇳 直连 | 双栈', '🇨🇳 直连 | IPv4优先', '🇨🇳 直连 | IPv6优先', '🇨🇳 直连 | 仅IPv4', '🇨🇳 直连 | 仅IPv6']
     icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/China.png'
 
@@ -702,7 +713,9 @@ rules:
   - RULE-SET,ai,AI
   - RULE-SET,github,默认代理
   - RULE-SET,microsoft,Microsoft
+  - RULE-SET,microsoft_ip,Microsoft,no-resolve
   - RULE-SET,apple,Apple
+  - RULE-SET,apple_ip,Apple,no-resolve
   - RULE-SET,telegram,Telegram
   - RULE-SET,telegram_ip,Telegram,no-resolve
   - RULE-SET,steam,Steam
