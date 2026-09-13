@@ -42,7 +42,6 @@ proxy-providers:
     <<: [*proxy_providers_common, *global_exclude_filter]
     url: '自建订阅源地址'
     path: ./proxy_provider/zijian.yaml
-    dialer-proxy: '🔗链式中转'
     override:
       additional-prefix: '[自建] '
 
@@ -472,7 +471,7 @@ group_filter:
 chain_filter:
   relay_filter: &relay_filter { filter: '(?i)(中转|前置|relay|ecs|阿里|aliyun)' }
   relay_exclude: &relay_exclude { exclude-filter: '(?i)(中转|前置|relay|ecs|阿里|aliyun)' }
-  relay_exit_filter: &relay_exit_filter { filter: '(?i)(出口|落地|exit|land)' }
+  relay_exit_filter: &relay_exit_filter { filter: '(?i)(land)' }
 
 proxy-groups:
   - name: '默认代理'
