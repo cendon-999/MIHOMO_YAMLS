@@ -45,6 +45,14 @@ proxy-providers:
     dialer-proxy: '🔗链式中转'
     override:
       additional-prefix: '[自建] '
+  链式出口:
+    <<: [*proxy_providers_common, *global_exclude_filter]
+    url: '自建订阅源地址'
+    path: ./proxy_provider/chain_exit.yaml
+    filter: '(?i)(land)'
+    dialer-proxy: '🔗链式中转'
+    override:
+      additional-prefix: '[出口·中转] '
 
 # 节点配置
 proxies:
@@ -509,16 +517,12 @@ proxy-groups:
   - name: '🔗链式中转'
     type: select
     include-all: true
-    proxies:
-      - '直连'   # 选这顶 = 不走中转（落地直连）；选下面的中转节点 = 走中转
     <<: *relay_filter
     icon: 'https://gh-proxy.com/https://raw.githubusercontent.com/bgpeer/icons/main/color/chaintransfer.png'
 
   - name: '🔗链式出口'
     type: select
-    include-all: true
-    exclude-type: 'DIRECT'
-    <<: *relay_exclude
+    use: ['链式出口']
     icon: 'https://gh-proxy.com/https://raw.githubusercontent.com/bgpeer/icons/main/color/chainexport.png'
 
   - name: '游戏节点'
