@@ -509,8 +509,6 @@ proxy-groups:
   - name: '🔗链式中转'
     type: select
     include-all: true
-    proxies:
-      - '直连'   # 选这顶 = 不走中转（落地直连）；选下面的中转节点 = 走中转
     <<: *relay_filter
     icon: 'https://gh-proxy.com/https://raw.githubusercontent.com/bgpeer/icons/main/color/chaintransfer.png'
 
