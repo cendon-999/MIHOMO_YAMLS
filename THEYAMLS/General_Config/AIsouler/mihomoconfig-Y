@@ -1,5 +1,5 @@
 #  ---------说明---------
-#  mihomo配置（全量版）- 已加入链式代理（手动版）
+#  mihomo配置（全量版）
 #  ---------------------
 
 # --- 锚点定义 (通用属性) ---
@@ -42,7 +42,6 @@ proxy-providers:
     <<: [*proxy_providers_common, *global_exclude_filter]
     url: '自建订阅源地址'
     path: ./proxy_provider/zijian.yaml
-    dialer-proxy: '🔗链式中转'
     override:
       additional-prefix: '[自建] '
 # 节点配置
@@ -53,7 +52,6 @@ proxies:
   - { name: '🇨🇳 直连 | 仅IPv4', type: direct, ip-version: ipv4 }
   - { name: '🇨🇳 直连 | 仅IPv6', type: direct, ip-version: ipv6 }
   # ↓ 在这里添加你的前置/自建节点
-  # 名字里带"中转/前置/ECS/阿里/relay"任一关键词，就会被 🔗链式中转 组自动收录
   # 示例格式：
   # - name: 'SS-中转-自定义'
   #   type: ss
@@ -465,11 +463,6 @@ group_filter:
       exclude-type: 'direct',
     }
 
-# 链式代理过滤器
-chain_filter:
-  relay_filter: &relay_filter { filter: '(?i)(中转|前置|relay|ecs|阿里|aliyun)' }
-  relay_exclude: &relay_exclude { exclude-filter: '(?i)(中转|前置|relay|ecs|阿里|aliyun)' }
-
 proxy-groups:
   - name: '默认代理'
     <<: *group_common_select
@@ -500,13 +493,6 @@ proxy-groups:
 
   - name: '负载均衡'
     <<: *group_common_load
-
-  # --- 链式代理（手动版） ---
-  - name: '🔗链式中转'
-    type: select
-    include-all: true
-    <<: *relay_filter
-    icon: 'https://gh-proxy.com/https://raw.githubusercontent.com/bgpeer/icons/main/color/chaintransfer.png'
 
   - name: '游戏节点'
     <<: *group_common_select
