@@ -31,13 +31,15 @@ https://raw.githubusercontent.com/Lanlan13-14/Rules/refs/heads/main/configfull.y
 https://raw.githubusercontent.com/Lanlan13-14/Rules/refs/heads/main/configfull_lite.yaml|THEYAMLS/General_Config/Lanlan13-14/configfull_lite.yaml
 https://raw.githubusercontent.com/Lanlan13-14/Rules/refs/heads/main/configfull_NoAd.yaml|THEYAMLS/General_Config/Lanlan13-14/configfull_NoAd.yaml
 https://raw.githubusercontent.com/echs-top/proxy/heads/main/mihomo.yaml|THEYAMLS/General_Config/echs-top/mihomo.yaml
-https://raw.githubusercontent.com/qichiyuhub/rule/refs/heads/main/config/mihomo/config.yaml|THEYAMLS/General_Config/qichiyuhub/config.yaml
+https://raw.githubusercontent.com/qichiyuhub/rule/refs/heads/main/config/mihomo/config/config.yaml|THEYAMLS/General_Config/qichiyuhub/config.yaml
+https://raw.githubusercontent.com/qichiyuhub/rule/refs/heads/main/config/mihomo/other/fuxie.yaml|THEYAMLS/General_Config/qichiyuhub/fuxie.yaml
+https://raw.githubusercontent.com/qichiyuhub/rule/refs/heads/main/config/mihomo/other/proxychain.yaml|THEYAMLS/General_Config/qichiyuhub/proxychain.yaml
 https://raw.githubusercontent.com/luestr/ProxyResource/main/Tool/Clash/Config/Clash_Sample_Config_By_iKeLee.yaml|THEYAMLS/General_Config/iKeLee/Clash_Sample.yaml
 https://raw.githubusercontent.com/sunfing/iNg/refs/heads/main/Config/ConfigForClash|THEYAMLS/General_Config/fufu/ConfigForClash.yaml
 https://gist.githubusercontent.com/liuran001/5ca84f7def53c70b554d3f765ff86a33/raw/9de058af0600fbbcfb480f9cbc23bd7dafe9d039/config.yaml|THEYAMLS/General_Config/liuran001/config.yaml
 https://raw.githubusercontent.com/wanswu/my-backup/refs/heads/main/clash/config.yaml|THEYAMLS/General_Config/wanswu/config.yaml
 https://raw.githubusercontent.com/Repcz/Tool/refs/heads/X/mihomo/Client/config.yaml|THEYAMLS/General_Config/Repcz/config.yaml
-https://raw.githubusercontent.com/Repcz/Tool/refs/heads/X/mihomo/Client/Lite/config.yaml|THEYAMLS/General_Config/Repcz/config_lite.yaml
+https://raw.githubusercontent.com/Repcz/Tool/refs/heads/X/example/mihomo.yaml|THEYAMLS/General_Config/Repcz/mihomo.yaml
 https://raw.githubusercontent.com/lvbibir/clash/refs/heads/master/mihomo.yaml|THEYAMLS/General_Config/lvbibir/mihomo.yaml
 https://raw.githubusercontent.com/Seven1echo/Yaml/refs/heads/main/Seven1_fallback_Geo.yaml|THEYAMLS/General_Config/Seven1echo/Seven1_fallback_Geo.yaml
 https://raw.githubusercontent.com/Seven1echo/Yaml/refs/heads/main/Seven1_fallback_Rule-Set.yaml|THEYAMLS/General_Config/Seven1echo/Seven1_fallback_Rule-Set.yaml
@@ -72,6 +74,9 @@ https://raw.githubusercontent.com/Tangerinell/mihomo_rules_profile/refs/heads/ma
 https://raw.githubusercontent.com/YiXuanZX/rules/refs/heads/main/mihomo.yaml|THEYAMLS/General_Config/YiXuanZX/mihomo.yaml
 https://raw.githubusercontent.com/XVSVTsama/mihomo-config-self/refs/heads/main/mihomo.yaml|THEYAMLS/General_Config/XVSVTSAMA/mihomo.yaml
 https://raw.githubusercontent.com/Sfssup/mihomo-set/refs/heads/main/config/config.yaml|THEYAMLS/General_Config/sfssup/mihomo.yaml
+https://clash.md/configs/region-single-provider.yaml|THEYAMLS/General_Config/From_clash_by_hako/region-single-provider.yaml
+https://clash.md/configs/region-dual-provider.yaml|THEYAMLS/General_Config/From_clash_by_hako/region-dual-provider.yaml
+https://clash.md/configs/service-single-provider.yaml|THEYAMLS/General_Config/From_clash_by_hako/service-single-provider.yaml
 EOF
 )
 
