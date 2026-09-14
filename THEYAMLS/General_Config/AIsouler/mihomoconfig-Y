@@ -82,13 +82,11 @@ profile:
   store-fake-ip: true
 
 # 国内外 DNS 定义
-defaultDNS: &defaultDNS ['system', '223.5.5.5', '119.29.29.29']
 chinaDNS: &chinaDNS ['system', '223.5.5.5#DIRECT', '119.29.29.29#DIRECT']
 chinaDohDNS:
   &chinaDohDNS [
     'https://223.5.5.5/dns-query#DIRECT',
-    'https://doh.pub/dns-query#DIRECT',
-  ]
+      ]
 foreignDNS: &foreignDNS ['https://cloudflare-dns.com/dns-query#默认代理', 'https://dns.google/dns-query#默认代理']
 
 dns:
@@ -102,7 +100,7 @@ dns:
   fake-ip-range6: 2001:2::1/48
   fake-ip-filter: ['rule-set:private', 'rule-set:fakeip_filter', 'rule-set:geolocation-cn', 'rule-set:apple_cn', 'rule-set:microsoft_cn', 'rule-set:games_cn', 'rule-set:epicgames', 'rule-set:nvidia_cn', 'rule-set:cn', 'rule-set:cn_additional', '+.proxima.nie.netease.com', '+.sharjeck.com', '+.stun.*', '+.stun.*.*', '+.stun.*.*.*', '+.stun.*.*.*.*', '+.turn', '+.turn.*', '+.synology.com']
   proxy-server-nameserver: *chinaDohDNS
-  default-nameserver: *defaultDNS
+  default-nameserver: *chinaDohDNS
   nameserver: *foreignDNS
   nameserver-policy:
     'rule-set:cn': *chinaDNS
