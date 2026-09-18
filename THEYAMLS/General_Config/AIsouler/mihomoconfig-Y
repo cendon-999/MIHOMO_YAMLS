@@ -125,7 +125,7 @@ ntp:
 
 tun:
   enable: true
-  stack: gvisor
+  stack: Mips
   auto-route: true
   strict-route: true
   auto-redirect: true
