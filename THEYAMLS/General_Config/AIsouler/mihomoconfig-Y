@@ -103,8 +103,10 @@ dns:
   proxy-server-nameserver: *proxyServerDNS
   nameserver: *foreignDNS
   nameserver-policy:
+    'rule-set:private': 'system'
     'rule-set:cn': *chinaDNS
   direct-nameserver: *chinaDNS
+  direct-nameserver-follow-policy: true
 
 hosts:
   'doh.pub': ['1.12.12.12', '120.53.53.53']
@@ -257,6 +259,16 @@ rule-providers:
     url: 'https://raw.githubusercontent.com/appshubcc/bett-rules/meta/geo/geoip/steam.mrs'
     path: './ruleset/steam_ip.mrs'
     path-in-bundle: 'geo/geoip/steam.mrs'
+  paypal:
+    <<: *rule_providers_domain
+    url: 'https://raw.githubusercontent.com/appshubcc/bett-rules/meta/geo/geosite/paypal.mrs'
+    path: './ruleset/paypal.mrs'
+    path-in-bundle: 'geo/geosite/paypal.mrs'
+  douyin:
+    <<: *rule_providers_domain
+    url: 'https://raw.githubusercontent.com/appshubcc/bett-rules/meta/geo/geosite/douyin.mrs'
+    path: './ruleset/douyin.mrs'
+    path-in-bundle: 'geo/geosite/douyin.mrs'
   tiktok:
     <<: *rule_providers_domain
     url: 'https://raw.githubusercontent.com/appshubcc/bett-rules/meta/geo/geosite/tiktok.mrs'
@@ -719,6 +731,8 @@ rules:
   - RULE-SET,facebook_ip,Meta,no-resolve
   - RULE-SET,line,Line
   - RULE-SET,netflix,Netflix
+  - RULE-SET,paypal,Crypto
+  - RULE-SET,douyin,TikTok
   - RULE-SET,netflix_ip,Netflix,no-resolve
   - RULE-SET,emby,Emby
   - RULE-SET,emos,Emby
