@@ -60,7 +60,7 @@ proxy-providers:
 #   age-secret-key: ''
 #   path: ./proxy_provider/provider2.yaml
 #   override:
-#     additional-prefix: 'p2 | '
+#     additional-prefix: '次 | '
 
 # 节点配置，可添加自定义节点
 proxies:
@@ -289,6 +289,11 @@ rule-providers:
     url: 'https://cdn.jsdmirror.com/gh/appshubcc/bett-rules@meta/geo/geosite/category-games.mrs'
     path: './ruleset/category-games.mrs'
     path-in-bundle: 'geo/geosite/category-games.mrs'
+  speedtest:
+    <<: *rule_providers_domain
+    url: 'https://cdn.jsdmirror.com/gh/appshubcc/bett-rules@meta/geo/geosite/category-speedtest.mrs'
+    path: './ruleset/category-speedtest.mrs'
+    path-in-bundle: 'geo/geosite/category-speedtest.mrs'
   steam_ip:
     <<: *rule_providers_ip
     url: 'https://cdn.jsdmirror.com/gh/appshubcc/bett-rules@meta/geo/geoip/steam.mrs'
@@ -484,6 +489,7 @@ proxies_common:
           '高倍率节点',
           '家宽节点',
           '其他节点',
+          '游戏节点',
         ],
     }
 
@@ -505,6 +511,7 @@ proxies_common:
           '高倍率节点',
           '家宽节点',
           '其他节点',
+          '游戏节点',
         ],
     }
 
@@ -552,6 +559,7 @@ proxy-groups:
         '自动选择',
         '负载均衡',
         '其他节点',
+        '游戏节点',
       ]
     icon: 'https://cdn.jsdmirror.com/gh/AIsouler/MyClash@main/Icons/svg/Proxy.svg'
 
@@ -566,6 +574,12 @@ proxy-groups:
 
   - name: '负载均衡'
     <<: *group_common_load
+
+  - name: '网络测速'
+    <<: *group_common_select
+    include-all: true
+    exclude-type: 'DIRECT'
+    icon: 'https://cdn.jsdmirror.com/gh/AIsouler/MyClash@main/Icons/svg/Available.svg'
 
   - name: 'FCM'
     <<: [*group_common_select, *proxies_direct]
@@ -746,17 +760,11 @@ proxy-groups:
   - name: '其他节点-自动选择'
     <<: [*group_common_auto, *exclude_filter]
 
-  - name: '网络测速'
-    <<: *group_common_select
-    include-all: true
-    exclude-type: 'DIRECT'
-    icon: 'https://cdn.jsdmirror.com/gh/AIsouler/MyClash@main/Icons/svg/Speedtest.svg'
-
   - name: '游戏节点'
     <<: *group_common_select
     include-all: true
     exclude-type: 'DIRECT'
-    icon: 'https://cdn.jsdmirror.com/gh/AIsouler/MyClash@main/Icons/svg/Game.svg'
+    icon: 'https://cdn.jsdmirror.com/gh/AIsouler/MyClash@main/Icons/svg/Server.svg'
 
 # --- 路由规则 (Rules) ---
 
@@ -803,6 +811,7 @@ rules:
   - RULE-SET,steam,Steam
   - RULE-SET,steam_ip,Steam,no-resolve
   - RULE-SET,games,游戏节点
+  - RULE-SET,speedtest,网络测速
   - RULE-SET,tiktok,TikTok
   - RULE-SET,tiktok_ip,TikTok,no-resolve
   - RULE-SET,twitter,Twitter
