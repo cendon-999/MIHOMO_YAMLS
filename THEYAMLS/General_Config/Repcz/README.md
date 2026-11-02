@@ -6,15 +6,15 @@
 
 ## ⚔️ 配置横向对比
 
-| 特性 | `config_lite.yaml` | `mihomo.yaml` | `config.yaml` |
+| 特性 | `config_lite.yaml` | `config.yaml` | `mihomo.yaml` |
 | :--- | :--- | :--- | :--- |
-| **大小** | 2.9 KB | 3.1 KB | 8.0 KB |
+| **大小** | 2.9 KB | 8.0 KB | 3.1 KB |
 | **混合端口** | 7893 | 7893 | 7893 |
 | **面板地址** | - | - | - |
 | **运行模式** | rule | rule | rule |
 | **TUN** | ✅ | ✅ | ✅ |
-| **策略组** | **1** | **5** | **17** |
-| **规则数** | **16** | **12** | **24** |
+| **策略组** | **1** | **17** | **5** |
+| **规则数** | **16** | **24** | **12** |
 
 ## 📄 配置详情
 
@@ -27,21 +27,6 @@
 | 名称 | 类型 |
 | :--- | :--- |
 | 👆 Proxy | `select` |
-</details>
-
-#### 📝 mihomo.yaml
-- **路径**: `mihomo.yaml` | **大小**: 3.1 KB | [查看源码](https://github.com/HenryChiao/MIHOMO_YAMLS/blob/main/THEYAMLS/General_Config/Repcz/mihomo.yaml)
-- **模式**: rule | **TUN**: ✅ | **IPv6**: 🚫
-<details>
-<summary>🔍 策略组 (5个)</summary>
-
-| 名称 | 类型 |
-| :--- | :--- |
-| 👆 Proxy | `select` |
-| 👆 AI | `select` |
-| 👆 Telegram | `select` |
-| 🔧 Fallback | `fallback` |
-| 👆 Final | `select` |
 </details>
 
 #### 📝 config.yaml
@@ -69,4 +54,19 @@
 | ♻️ Singapore | `url-test` |
 | ♻️ Japan | `url-test` |
 | ♻️ Taiwan | `url-test` |
+</details>
+
+#### 📝 mihomo.yaml
+- **路径**: `mihomo.yaml` | **大小**: 3.1 KB | [查看源码](https://github.com/HenryChiao/MIHOMO_YAMLS/blob/main/THEYAMLS/General_Config/Repcz/mihomo.yaml)
+- **模式**: rule | **TUN**: ✅ | **IPv6**: 🚫
+<details>
+<summary>🔍 策略组 (5个)</summary>
+
+| 名称 | 类型 |
+| :--- | :--- |
+| 👆 Proxy | `select` |
+| 👆 AI | `select` |
+| 👆 Telegram | `select` |
+| 🔧 Fallback | `fallback` |
+| 👆 Final | `select` |
 </details>
