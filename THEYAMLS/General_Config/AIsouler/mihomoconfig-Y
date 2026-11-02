@@ -1,5 +1,9 @@
 #  ---------说明---------
 #  mihomo配置（全量版）
+#  作者：AIsouler
+#  原仓库：https://github.com/AIsouler/MyClash
+#  配置链接：https://raw.githubusercontent.com/AIsouler/MyClash/main/Config/mihomoConfig.yaml
+#  友情推荐，非常好用、省电且内存占用低的代理软件：https://github.com/appshubcc/Bettbox
 #  ---------------------
 
 # --- 锚点定义 (通用属性) ---
@@ -8,7 +12,7 @@ proxy_providers_common:
     type: http,
     interval: 86400,
     proxy: DIRECT,
-    exclude-type: 'direct|reject|rematch',
+    exclude-type: 'DIRECT|REJECT|REMATCH',
     health-check: { enable: true, url: https://www.apple.com/library/test/success.html, interval: 600, lazy: true },
   }
 
@@ -18,52 +22,57 @@ global_exclude_filter:
     exclude-filter: '(?i)(群|返利|循环|官网|客服|网站|网址|获取|订阅|流量|到期|机场|下次|版本|官址|过期|已用|联系|邮箱|工单|贩卖|通知|倒卖|防止|国内|地址|电报|频道|无法|说明|提示|访问|支持|教程|关注|更新|作者|加入|超时|收藏|优惠|福利|邀请|好友|失联|选择|剩余|公益|发布|DIZTNA|通路|登录|定时|渠道|牢记|永久|余额|阁下|本站|刷新|导航|建议|重置|以下|过滤|⚠️|@|t\.me\/\+|\bexpire\b|\bhttps?:\/\/|\.com|\btraffic\b)',
   }
 
-# 订阅提供者
+# 订阅提供者，如果你想要添加多个订阅提供者，可以复制 provider1 的配置块，并修改 url 、 path 和 additional-prefix 字段。
 proxy-providers:
-  优质服务商:
+  provider1:
     <<: [*proxy_providers_common, *global_exclude_filter]
-    url: '优质订阅源地址1'
-    path: ./proxy_provider/youzhi.yaml
+    url: '优质订阅源地址1' # 此处单引号中间填入机场订阅链接
+    age-secret-key: '' # 此处填入机场订阅链接解密私钥，如果机场订阅链接需要解密才能使用，请将解密私钥填入单引号中间，否则不要改动此项
+    path: ./proxy_provider/provider1.yaml
     override:
-      additional-suffix: ' [优]'
-  次优服务商:
+      additional-prefix: 'p1 | ' # 给节点名称添加前缀，防止不同订阅的节点重名导致出现问题  
+  provider2:
     <<: [*proxy_providers_common, *global_exclude_filter]
-    url: '优质订阅源地址2'
-    path: ./proxy_provider/ciyou.yaml
+    url: '优质订阅源地址2' # 此处单引号中间填入机场订阅链接
+    age-secret-key: '' # 此处填入机场订阅链接解密私钥，如果机场订阅链接需要解密才能使用，请将解密私钥填入单引号中间，否则不要改动此项
+    path: ./proxy_provider/provider2.yaml
     override:
-      additional-suffix: ' [次]'
-  备用服务商:
+      additional-prefix: 'p2 | ' # 给节点名称添加前缀，防止不同订阅的节点重名导致出现问题
+  provider3:
     <<: [*proxy_providers_common, *global_exclude_filter]
-    url: '备用订阅源地址'
-    path: ./proxy_provider/beiyong.yaml
+    url: '备用订阅源地址' # 此处单引号中间填入机场订阅链接
+    age-secret-key: '' # 此处填入机场订阅链接解密私钥，如果机场订阅链接需要解密才能使用，请将解密私钥填入单引号中间，否则不要改动此项
+    path: ./proxy_provider/provider3.yaml
     override:
-      additional-suffix: ' [备]'
-  聚合服务商:
+      additional-prefix: 'p3 | ' # 给节点名称添加前缀，防止不同订阅的节点重名导致出现问题
+  provider4:
     <<: [*proxy_providers_common, *global_exclude_filter]
-    url: '自建订阅源地址'
-    path: ./proxy_provider/zijian.yaml
+    url: '自建订阅源地址' # 此处单引号中间填入机场订阅链接
+    age-secret-key: '' # 此处填入机场订阅链接解密私钥，如果机场订阅链接需要解密才能使用，请将解密私钥填入单引号中间，否则不要改动此项
+    path: ./proxy_provider/provider4.yaml
     override:
-      additional-prefix: '[自建] '
-# 节点配置
+      additional-prefix: 'p4 | ' # 给节点名称添加前缀，防止不同订阅的节点重名导致出现问题
+
+# 以下是一个示例，各行缩进必须严格对齐provider1
+# provider2:
+#   <<: [*proxy_providers_common, *global_exclude_filter]
+#   url: ''
+#   age-secret-key: ''
+#   path: ./proxy_provider/provider2.yaml
+#   override:
+#     additional-prefix: 'p2 | '
+
+# 节点配置，可添加自定义节点
 proxies:
   - { name: '🇨🇳 直连 | 双栈', type: direct }
   - { name: '🇨🇳 直连 | IPv4优先', type: direct, ip-version: ipv4-prefer }
   - { name: '🇨🇳 直连 | IPv6优先', type: direct, ip-version: ipv6-prefer }
   - { name: '🇨🇳 直连 | 仅IPv4', type: direct, ip-version: ipv4 }
   - { name: '🇨🇳 直连 | 仅IPv6', type: direct, ip-version: ipv6 }
-  # ↓ 在这里添加你的前置/自建节点
-  # 示例格式：
-  # - name: 'SS-中转-自定义'
-  #   type: ss
-  #   server: <服务器IP>
-  #   port: <端口>
-  #   cipher: <加密方式>
-  #   password: '<密码>'
-  #   udp: true
 
 # --- 基础全局配置 ---
 
-mixed-port: 7893
+mixed-port: 7890
 allow-lan: true
 ipv6: true
 mode: rule
@@ -98,7 +107,7 @@ dns:
   enhanced-mode: fake-ip
   fake-ip-range: 198.18.0.1/15
   fake-ip-range6: 2001:2::1/48
-  fake-ip-filter: ['rule-set:private', 'rule-set:fakeip_filter', 'rule-set:geolocation-cn', 'rule-set:apple_cn', 'rule-set:microsoft_cn', 'rule-set:games_cn', 'rule-set:epicgames', 'rule-set:nvidia_cn', 'rule-set:cn', 'rule-set:cn_additional', 'rule-set:googlefcm', '+.proxima.nie.netease.com', '+.sharjeck.com', '+.stun.*', '+.stun.*.*', '+.stun.*.*.*', '+.stun.*.*.*.*', '+.turn', '+.turn.*', '+.synology.com']
+  fake-ip-filter: ['rule-set:private', 'rule-set:fakeip_filter', 'rule-set:geolocation-cn', 'rule-set:googlefcm']
   default-nameserver: *defaultDNS
   proxy-server-nameserver: *proxyServerDNS
   nameserver: *foreignDNS
@@ -113,7 +122,11 @@ hosts:
   'doh.pub': ['1.12.12.12', '120.53.53.53']
   'cloudflare-dns.com': ['1.1.1.1', '1.0.0.1']
   'dns.google': ['8.8.8.8', '8.8.4.4']
+
+  # 解决谷歌商店无法下载的问题
   'services.googleapis.cn': 'services.googleapis.com'
+
+  # 屏蔽哔哩哔哩PCDN，解决访问视频卡顿/直播问题
   '+.mcdn.bilivideo.com': ['0.0.0.0']
   '+.mcdn.bilivideo.cn': ['0.0.0.0']
   '+.edge.mountaintoys.cn': ['0.0.0.0']
@@ -137,12 +150,15 @@ tun:
 
 # --- 规则集 ---
 
+# Rule Provider 通用配置
 rule_providers_common:
   rule_providers_domain: &rule_providers_domain { type: http, format: mrs, interval: 86400, behavior: domain }
   rule_providers_ip: &rule_providers_ip { type: http, format: mrs, interval: 86400, behavior: ipcidr }
 
+# 定义 Rule Providers
 rule-providers:
   # --- 直连规则集 ---
+
   private:
     <<: *rule_providers_domain
     url: 'https://cdn.jsdmirror.com/gh/appshubcc/bett-rules@meta/geo/geosite/private.mrs'
@@ -158,11 +174,11 @@ rule-providers:
     url: 'https://cdn.jsdmirror.com/gh/appshubcc/bett-rules@meta/geo/geosite/category-games@cn.mrs'
     path: './ruleset/category-games@cn.mrs'
     path-in-bundle: 'geo/geosite/category-games@cn.mrs'
-  epicgames:
+  synology:
     <<: *rule_providers_domain
-    url: 'https://cdn.jsdmirror.com/gh/appshubcc/bett-rules@meta/geo/geosite/epicgames.mrs'
-    path: './ruleset/epicgames.mrs'
-    path-in-bundle: 'geo/geosite/epicgames.mrs'
+    url: 'https://cdn.jsdmirror.com/gh/appshubcc/bett-rules@meta/geo/geosite/synology.mrs'
+    path: './ruleset/synology.mrs'
+    path-in-bundle: 'geo/geosite/synology.mrs'
   nvidia_cn:
     <<: *rule_providers_domain
     url: 'https://cdn.jsdmirror.com/gh/appshubcc/bett-rules@meta/geo/geosite/nvidia@cn.mrs'
@@ -190,6 +206,7 @@ rule-providers:
     path-in-bundle: 'geo/geoip/cn.mrs'
 
   # --- 代理规则集 ---
+
   googlefcm:
     <<: *rule_providers_domain
     url: 'https://cdn.jsdmirror.com/gh/appshubcc/bett-rules@meta/geo/geosite/googlefcm.mrs'
@@ -225,16 +242,16 @@ rule-providers:
     url: 'https://cdn.jsdmirror.com/gh/appshubcc/bett-rules@meta/geo/geosite/microsoft.mrs'
     path: './ruleset/microsoft.mrs'
     path-in-bundle: 'geo/geosite/microsoft.mrs'
-  apple:
-    <<: *rule_providers_domain
-    url: 'https://cdn.jsdmirror.com/gh/appshubcc/bett-rules@meta/geo/geosite/apple.mrs'
-    path: './ruleset/apple.mrs'
-    path-in-bundle: 'geo/geosite/apple.mrs'
   microsoft_ip:
     <<: *rule_providers_ip
     url: 'https://cdn.jsdmirror.com/gh/appshubcc/bett-rules@meta/geo/geoip/microsoft.mrs'
     path: './ruleset/microsoft_ip.mrs'
     path-in-bundle: 'geo/geoip/microsoft.mrs'
+  apple:
+    <<: *rule_providers_domain
+    url: 'https://cdn.jsdmirror.com/gh/appshubcc/bett-rules@meta/geo/geosite/apple.mrs'
+    path: './ruleset/apple.mrs'
+    path-in-bundle: 'geo/geosite/apple.mrs'
   apple_ip:
     <<: *rule_providers_ip
     url: 'https://cdn.jsdmirror.com/gh/appshubcc/bett-rules@meta/geo/geoip/apple.mrs'
@@ -260,21 +277,6 @@ rule-providers:
     url: 'https://cdn.jsdmirror.com/gh/appshubcc/bett-rules@meta/geo/geoip/steam.mrs'
     path: './ruleset/steam_ip.mrs'
     path-in-bundle: 'geo/geoip/steam.mrs'
-  paypal:
-    <<: *rule_providers_domain
-    url: 'https://cdn.jsdmirror.com/gh/appshubcc/bett-rules@meta/geo/geosite/paypal.mrs'
-    path: './ruleset/paypal.mrs'
-    path-in-bundle: 'geo/geosite/paypal.mrs'
-  patreon:
-    <<: *rule_providers_domain
-    url: 'https://cdn.jsdmirror.com/gh/appshubcc/bett-rules@meta/geo/geosite/patreon.mrs'
-    path: './ruleset/patreon.mrs'
-    path-in-bundle: 'geo/geosite/patreon.mrs'
-  douyin:
-    <<: *rule_providers_domain
-    url: 'https://cdn.jsdmirror.com/gh/appshubcc/bett-rules@meta/geo/geosite/douyin.mrs'
-    path: './ruleset/douyin.mrs'
-    path-in-bundle: 'geo/geosite/douyin.mrs'
   tiktok:
     <<: *rule_providers_domain
     url: 'https://cdn.jsdmirror.com/gh/appshubcc/bett-rules@meta/geo/geosite/tiktok.mrs'
@@ -334,7 +336,7 @@ rule-providers:
     <<: *rule_providers_domain
     url: 'https://cdn.jsdmirror.com/gh/appshubcc/bett-rules@meta/geo/geosite/pikpak.mrs'
     path: './ruleset/pikpak.mrs'
-    path-in-bundle: 'geo/geosite/pikpak.mrs'
+    'path-in-bundle': 'geo/geosite/pikpak.mrs'
   spotify:
     <<: *rule_providers_domain
     url: 'https://cdn.jsdmirror.com/gh/appshubcc/bett-rules@meta/geo/geosite/spotify.mrs'
@@ -350,16 +352,21 @@ rule-providers:
     url: 'https://cdn.jsdmirror.com/gh/appshubcc/bett-rules@meta/geo/geosite/category-cryptocurrency.mrs'
     path: './ruleset/cryptocurrency.mrs'
     path-in-bundle: 'geo/geosite/category-cryptocurrency.mrs'
+  paypal:
+    <<: *rule_providers_domain
+    url: 'https://cdn.jsdmirror.com/gh/appshubcc/bett-rules@meta/geo/geosite/paypal.mrs'
+    path: './ruleset/paypal.mrs'
+    path-in-bundle: 'geo/geosite/paypal.mrs'
+  patreon:
+    <<: *rule_providers_domain
+    url: 'https://cdn.jsdmirror.com/gh/appshubcc/bett-rules@meta/geo/geosite/patreon.mrs'
+    path: './ruleset/patreon.mrs'
+    path-in-bundle: 'geo/geosite/patreon.mrs'
   ehentai:
     <<: *rule_providers_domain
     url: 'https://cdn.jsdmirror.com/gh/appshubcc/bett-rules@meta/geo/geosite/ehentai.mrs'
     path: './ruleset/ehentai.mrs'
     path-in-bundle: 'geo/geosite/ehentai.mrs'
-  speedtest:
-    <<: *rule_providers_domain
-    url: 'https://cdn.jsdmirror.com/gh/666OS/rules@release/mihomo/domain/Speedtest.mrs'
-    path: './ruleset/speedtest.mrs'
-    path-in-bundle: 'geo/geosite/speedtest.mrs'
   geolocation-!cn:
     <<: *rule_providers_domain
     url: 'https://cdn.jsdmirror.com/gh/appshubcc/bett-rules@meta/geo/geosite/geolocation-!cn.mrs'
@@ -367,6 +374,7 @@ rule-providers:
     path-in-bundle: 'geo/geosite/geolocation-!cn.mrs'
 
   # --- 其他规则集 ---
+
   category-ads:
     <<: *rule_providers_domain
     url: 'https://cdn.jsdmirror.com/gh/appshubcc/bett-rules@meta/geo/geosite/category-ads.mrs'
@@ -387,9 +395,15 @@ rule-providers:
     url: 'https://cdn.jsdmirror.com/gh/appshubcc/bett-rules@meta/geo/geosite/cn.mrs'
     path: './ruleset/cn.mrs'
     path-in-bundle: 'geo/geosite/cn.mrs'
+  douyin:
+    <<: *rule_providers_domain
+    url: 'https://cdn.jsdmirror.com/gh/appshubcc/bett-rules@meta/geo/geosite/douyin.mrs'
+    path: './ruleset/douyin.mrs'
+    path-in-bundle: 'geo/geosite/douyin.mrs'
 
-# --- 策略组 ---
+# --- 策略组 (Proxy Groups) ---
 
+# 策略组通用配置
 group_common:
   group_common_select:
     &group_common_select {
@@ -434,6 +448,7 @@ group_common:
       hidden: true,
     }
 
+# 通用代理节点组
 proxies_common:
   proxies_default:
     &proxies_default {
@@ -450,8 +465,8 @@ proxies_common:
           '台湾',
           '低倍率节点',
           '高倍率节点',
+          '家宽节点',
           '其他节点',
-          '游戏节点',
         ],
     }
 
@@ -471,36 +486,38 @@ proxies_common:
           '台湾',
           '低倍率节点',
           '高倍率节点',
+          '家宽节点',
           '其他节点',
-          '游戏节点',
         ],
     }
 
   proxies_reject: &proxies_reject { proxies: ['REJECT', 'REJECT-DROP', 'PASS'] }
 
+# 地区过滤器正则表达式定义
 group_filter:
   HK_filter: &HK_filter { filter: '(?i)(🇭🇰|香港|(?<![A-Za-z])HKG?(?![A-Za-z])|hong\s*kong)' }
   JP_filter: &JP_filter { filter: '(?i)(🇯🇵|日本|东京|大阪|京都|(?<![A-Za-z])JPN?(?![A-Za-z])|japan)' }
   US_filter:
     &US_filter {
-      filter: '(?i)(🇺🇸|美国|纽约|洛杉矶|旧金山|芝加哥|休斯顿|迈阿密|西雅图|波士顿|华盛顿|拉斯维加斯|圣何塞|圣地亚哥|(?<![A-Za-z])USA?(?![A-Za-z])|america|united\s*states)',
+      filter: '(?i)(🇺🇸|美国|纽约|洛杉矶|旧金山|芝加哥|休斯顿|迈阿密|西雅图|波士顿|华盛顿|拉斯维加斯|圣何塞|(?<![A-Za-z])USA?(?![A-Za-z])|america|united\s*states)',
     }
   SG_filter: &SG_filter { filter: '(?i)(🇸🇬|新加坡|狮城|(?<![A-Za-z])SGP?(?![A-Za-z])|singapore)' }
   TW_filter: &TW_filter { filter: '(?i)(🇹🇼|台湾|台北|高雄|(?<![A-Za-z])TWN?(?![A-Za-z])|taiwan)' }
   low_filter:
     &low_filter {
-      filter: '(?i)(^(?!.*(?:剩|期)).*(?:(?<!\d)0\.[0-5]|(?<=[ |｜丨∣┃\-‐–—−－﹣])0[*×✕✖⨯⨉x倍])|(?:(?<=[ |｜丨∣┃\-‐–—−－﹣])[*×✕✖⨯⨉x]0(?= |倍|$))|^(?!.*(?:客户端|软件)).*下载|低倍|免费|(?<![A-Za-z])free(?![A-Za-z]))',
+      filter: '(?i)(^(?!.*(?:剩|期)).*(?:(?<![\d.])0(\.[0-5]|[*×✕✖⨯⨉x倍]))|(?:[*×✕✖⨯⨉x]0)|^(?!.*(?:客户端|软件)).*下载|低倍|免费|(?<![A-Za-z])free(?![A-Za-z]))',
     }
   high_filter:
     &high_filter {
-      filter: '(?i)(?<=[ |｜丨∣┃\-‐–—−－﹣])((?:[*×✕✖⨯⨉x]\s*(?:[2-9]\d*|[1-9]\d+)(?:\.\d+)?)|(?:(?<![\d.])(?:[2-9]\d*|[1-9]\d+)(?:\.\d+)?\s*(?:倍|[*×✕✖⨯⨉x])))',
+      filter: '(?i)(?:[*×✕✖⨯⨉x](?:[2-9]\d*|[1-9]\d+)(?:\.\d+)?)|(?:(?<![\d.])(?:[2-9]\d*|[1-9]\d+)(?:\.\d+)?(?:倍|[*×✕✖⨯⨉x]))',
     }
+  home_filter: &home_filter { filter: '(?i)(家宽|住宅|原生\s*IP|家庭宽带|\bISP\b|\bRES\b|residential)' }
   exclude_filter:
     &exclude_filter {
-      exclude-filter: '(?i)(🇭🇰|香港|(?<![A-Za-z])HKG?(?![A-Za-z])|hong\s*kong|🇯🇵|日本|东京|大阪|京都|(?<![A-Za-z])JPN?(?![A-Za-z])|japan|🇺🇸|美国|纽约|洛杉矶|旧金山|芝加哥|休斯顿|迈阿密|西雅图|波士顿|华盛顿|拉斯维加斯|圣何塞|圣地亚哥|(?<![A-Za-z])USA?(?![A-Za-z])|america|united\s*states|🇸🇬|新加坡|狮城|(?<![A-Za-z])SGP?(?![A-Za-z])|singapore|🇹🇼|台湾|台北|高雄|(?<![A-Za-z])TWN?(?![A-Za-z])|taiwan)',
-      exclude-type: 'direct',
+      exclude-filter: '(?i)(🇭🇰|香港|(?<![A-Za-z])HKG?(?![A-Za-z])|hong\s*kong|🇯🇵|日本|东京|大阪|京都|(?<![A-Za-z])JPN?(?![A-Za-z])|japan|🇺🇸|美国|纽约|洛杉矶|旧金山|芝加哥|休斯顿|迈阿密|西雅图|波士顿|华盛顿|拉斯维加斯|圣何塞|(?<![A-Za-z])USA?(?![A-Za-z])|america|united\s*states|🇸🇬|新加坡|狮城|(?<![A-Za-z])SGP?(?![A-Za-z])|singapore|🇹🇼|台湾|台北|高雄|(?<![A-Za-z])TWN?(?![A-Za-z])|taiwan)',
     }
 
+# 定义分流策略组
 proxy-groups:
   - name: '默认代理'
     <<: *group_common_select
@@ -513,11 +530,11 @@ proxy-groups:
         '台湾',
         '低倍率节点',
         '高倍率节点',
+        '家宽节点',
         '手动选择',
         '自动选择',
         '负载均衡',
         '其他节点',
-        '游戏节点',
       ]
     icon: 'https://cdn.jsdmirror.com/gh/AIsouler/MyClash@main/Icons/svg/Proxy.svg'
 
@@ -532,18 +549,6 @@ proxy-groups:
 
   - name: '负载均衡'
     <<: *group_common_load
-
-  - name: '游戏节点'
-    <<: *group_common_select
-    include-all: true
-    exclude-type: 'DIRECT'
-    icon: 'https://cdn.jsdmirror.com/gh/Koolson/Qure@master/IconSet/Color/Global.png'
-
-  - name: '网络测试'
-    <<: [*group_common_select, *proxies_default]
-    include-all: true
-    exclude-type: 'DIRECT'
-    icon: 'https://cdn.jsdmirror.com/gh/Koolson/Qure@master/IconSet/Color/Speedtest.png'
 
   - name: 'FCM'
     <<: [*group_common_select, *proxies_direct]
@@ -562,6 +567,10 @@ proxy-groups:
     <<: [*group_common_select, *proxies_default]
     default-selected: '美国'
     icon: 'https://cdn.jsdmirror.com/gh/AIsouler/MyClash@main/Icons/svg/OpenAI.svg'
+
+  - name: 'GitHub'
+    <<: [*group_common_select, *proxies_default]
+    icon: 'https://cdn.jsdmirror.com/gh/AIsouler/MyClash@main/Icons/svg/GitHub.svg'
 
   - name: 'Microsoft'
     <<: [*group_common_select, *proxies_direct]
@@ -643,11 +652,10 @@ proxy-groups:
 
   - name: '直连'
     <<: *group_common_select
-    url: 'http://www.baidu.com'   # 直连节点用国内双栈测速点（miui的IPv6在你网络不通，apple境外直连超时）
     proxies: ['🇨🇳 直连 | 双栈', '🇨🇳 直连 | IPv4优先', '🇨🇳 直连 | IPv6优先', '🇨🇳 直连 | 仅IPv4', '🇨🇳 直连 | 仅IPv6']
     icon: 'https://cdn.jsdmirror.com/gh/AIsouler/MyClash@main/Icons/svg/China.svg'
 
-  # 地区策略组
+  # 定义地区策略组
   - name: '香港'
     <<: [*group_common_select, *HK_filter]
     include-all: true
@@ -692,7 +700,7 @@ proxy-groups:
     <<: [*group_common_select, *low_filter]
     include-all: true
     proxies: ['低倍率节点-自动选择']
-    icon: 'https://cdn.jsdmirror.com/gh/Koolson/Qure@master/IconSet/Color/Available_1.png'
+    icon: 'https://cdn.jsdmirror.com/gh/AIsouler/MyClash@main/Icons/svg/Available.svg'
   - name: '低倍率节点-自动选择'
     <<: [*group_common_auto, *low_filter]
 
@@ -700,33 +708,46 @@ proxy-groups:
     <<: [*group_common_select, *high_filter]
     include-all: true
     proxies: ['高倍率节点-自动选择']
-    icon: 'https://cdn.jsdmirror.com/gh/Koolson/Qure@master/IconSet/Color/Airport.png'
+    icon: 'https://cdn.jsdmirror.com/gh/AIsouler/MyClash@main/Icons/svg/Airport.svg'
   - name: '高倍率节点-自动选择'
     <<: [*group_common_auto, *high_filter]
+
+  - name: '家宽节点'
+    <<: [*group_common_select, *home_filter]
+    include-all: true
+    proxies: ['家宽节点-自动选择']
+    icon: 'https://cdn.jsdmirror.com/gh/AIsouler/MyClash@main/Icons/svg/Home.svg'
+  - name: '家宽节点-自动选择'
+    <<: [*group_common_auto, *home_filter]
 
   - name: '其他节点'
     <<: [*group_common_select, *exclude_filter]
     include-all: true
+    exclude-type: 'DIRECT'
     proxies: ['其他节点-自动选择']
     icon: 'https://cdn.jsdmirror.com/gh/AIsouler/MyClash@main/Icons/svg/WorldMap.svg'
   - name: '其他节点-自动选择'
     <<: [*group_common_auto, *exclude_filter]
 
-# --- 路由规则 ---
+# --- 路由规则 (Rules) ---
 
 rules:
+  # 规则集下载域名，避免出现鸡蛋问题
+  - DOMAIN,cdn.jsdmirror.com,直连
+
   # 私有网络直连
   - RULE-SET,private,直连
 
   # 国内直连
   - RULE-SET,geolocation-cn,直连
   - RULE-SET,games_cn,直连 # 已包含 steam 下载域名
-  - RULE-SET,epicgames,直连
+  - RULE-SET,synology,直连
   - RULE-SET,nvidia_cn,直连
   - RULE-SET,apple_cn,直连
   - RULE-SET,microsoft_cn,直连
   - DOMAIN,fsend.cn,直连
   - DOMAIN,international-gfe.download.nvidia.com,直连
+  - DOMAIN-SUFFIX,ctaiot.com,直连
 
   # 禁用国外 QUIC 流量
   - AND,((NETWORK,UDP),(DST-PORT,443),(NOT,((OR,((RULE-SET,cn_additional),(RULE-SET,cn_ip,no-resolve)))))),REJECT
@@ -734,17 +755,16 @@ rules:
   # 广告拦截
   - RULE-SET,category-ads,AdBlock
 
-  # 网络测试
-  - DOMAIN-KEYWORD,speedtest,网络测试
-  - RULE-SET,speedtest,网络测试
-
   # 代理规则
   - RULE-SET,googlefcm,FCM
   - RULE-SET,youtube,YouTube
   - RULE-SET,google,Google
   - RULE-SET,google_ip,Google,no-resolve
   - RULE-SET,ai,AI
-  - RULE-SET,github,默认代理
+  - DOMAIN,cdn.usefathom.com,AI
+  - DOMAIN-SUFFIX,intercom.io,AI
+  - DOMAIN-SUFFIX,intercomcdn.com,AI
+  - RULE-SET,github,GitHub
   - RULE-SET,microsoft,Microsoft
   - RULE-SET,microsoft_ip,Microsoft,no-resolve
   - RULE-SET,apple,Apple
@@ -761,9 +781,6 @@ rules:
   - RULE-SET,facebook_ip,Meta,no-resolve
   - RULE-SET,line,Line
   - RULE-SET,netflix,Netflix
-  - RULE-SET,paypal,PayPal
-  - RULE-SET,patreon,Patreon
-  - RULE-SET,douyin,TikTok
   - RULE-SET,netflix_ip,Netflix,no-resolve
   - RULE-SET,emby,Emby
   - RULE-SET,emos,Emby
@@ -781,6 +798,8 @@ rules:
   - RULE-SET,spotify,Spotify
   - RULE-SET,spotify_ip,Spotify,no-resolve
   - RULE-SET,cryptocurrency,Crypto
+  - RULE-SET,paypal,PayPal
+  - RULE-SET,patreon,Patreon
   - RULE-SET,ehentai,EHentai
 
   # 兜底规则
